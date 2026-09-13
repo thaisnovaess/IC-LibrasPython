@@ -1,7 +1,10 @@
 import cv2
 import mediapipe as mp
+import numpy as np
+
 from database.db import criar_tabelas, inserir_sinal, inserir_landmark
 
+# Configuração do MediaPipe para detectar mãos
 mp_hands = mp.solutions.hands
 mp_draw = mp.solutions.drawing_utils
 
@@ -12,69 +15,115 @@ hands = mp_hands.Hands(
     min_tracking_confidence=0.5
 )
 
-cap = cv2.VideoCapture(0)
+# Abre a câmera do computador
+camera = cv2.VideoCapture(0)
 
+# Cria as tabelas do banco, caso ainda não existam
 criar_tabelas()
 
 nome_sinal = input("Digite o nome do sinal que vai gravar: ").strip()
 
 gravando = False
 sinal_id = None
-frame_num = 0
+numero_frame = 0
+
+# Lista simples para guardar os dados antes de transformar em NumPy
+dados_landmarks = []
 
 print("Pressione G para começar a gravar")
 print("Pressione S para parar de gravar")
 print("Pressione ESC para sair")
 
 while True:
-    ret, frame = cap.read()
+    deu_certo, frame = camera.read()
 
-    if not ret:
-        print("Erro ao acessar câmera")
+    if not deu_certo:
+        print("Não foi possível acessar a câmera")
         break
 
-    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    result = hands.process(rgb)
+    # O OpenCV usa BGR, mas o MediaPipe usa RGB
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    if result.multi_hand_landmarks:
-        for hand_id, hand_landmarks in enumerate(result.multi_hand_landmarks):
-            mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+    # Processa o frame para encontrar a mão
+    resultado = hands.process(frame_rgb)
 
+    if resultado.multi_hand_landmarks:
+        for id_mao, pontos_mao in enumerate(resultado.multi_hand_landmarks):
+
+            # Desenha os pontos e ligações da mão na tela
+            mp_draw.draw_landmarks(
+                frame,
+                pontos_mao,
+                mp_hands.HAND_CONNECTIONS
+            )
+
+            # Se estiver gravando, salva os pontos da mão
             if gravando and sinal_id is not None:
-                for landmark_id, landmark in enumerate(hand_landmarks.landmark):
+                for id_ponto, ponto in enumerate(pontos_mao.landmark):
+
+                    # Guarda os dados em uma lista
+                    dados_landmarks.append([
+                        sinal_id,
+                        numero_frame,
+                        id_mao,
+                        id_ponto,
+                        ponto.x,
+                        ponto.y,
+                        ponto.z
+                    ])
+
+                    # Salva os mesmos dados no banco
                     inserir_landmark(
                         sinal_id=sinal_id,
-                        frame_num=frame_num,
-                        hand_id=hand_id,
-                        landmark_id=landmark_id,
-                        x=landmark.x,
-                        y=landmark.y,
-                        z=landmark.z
+                        frame_num=numero_frame,
+                        hand_id=id_mao,
+                        landmark_id=id_ponto,
+                        x=ponto.x,
+                        y=ponto.y,
+                        z=ponto.z
                     )
 
-    texto = "GRAVANDO" if gravando else "PARADO"
-    cv2.putText(frame, texto, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    status = "GRAVANDO" if gravando else "PARADO"
+
+    cv2.putText(
+        frame,
+        status,
+        (20, 40),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        1,
+        (0, 255, 0),
+        2
+    )
 
     cv2.imshow("LIBRAS - Coleta", frame)
 
     tecla = cv2.waitKey(1) & 0xFF
 
-    if tecla == 27:
+    if tecla == 27:  # ESC
         break
 
     elif tecla == ord('g'):
         gravando = True
-        frame_num = 0
+        numero_frame = 0
         sinal_id = inserir_sinal(nome_sinal, "coleta manual")
-        print(f"Iniciando gravação do sinal: {nome_sinal} | ID: {sinal_id}")
+
+        print(f"Gravando o sinal: {nome_sinal} | ID: {sinal_id}")
 
     elif tecla == ord('s'):
         gravando = False
         sinal_id = None
-        print("Gravação encerrada")
+
+        print("Gravação finalizada")
 
     if gravando:
-        frame_num += 1
+        numero_frame += 1
 
-cap.release()
+# Transforma a lista de dados em um array NumPy
+array_landmarks = np.array(dados_landmarks)
+
+print("Array criado com NumPy:")
+print(array_landmarks)
+print(type(array_landmarks))
+
+camera.release()
 cv2.destroyAllWindows()
