@@ -45,11 +45,21 @@ Webcam
 
 ## Demonstração com modelo treinado
 
-1. Coletar amostras de pelo menos três participantes, mantendo pessoas diferentes entre treino, validação e teste.
-2. Executar o treinamento manual.
-3. Iniciar a interface com `manual.joblib` em `artifacts/models/`.
-4. Ativar a câmera, executar uma letra e selecionar **Identificar sinal**.
-5. Confirmar ou corrigir o resultado e mostrar o evento salvo.
+1. Seguir o protocolo de [`OPERACAO_MODELO_MANUAL.md`](OPERACAO_MODELO_MANUAL.md).
+2. Coletar amostras de pelo menos três participantes, mantendo pessoas diferentes entre treino, validação e teste.
+3. Executar o treinamento manual e revisar `manual-report.json`.
+4. Reiniciar a interface com `manual.joblib` em `artifacts/models/`.
+5. Confirmar no endpoint `/api/status` que `available` e `manual_available` são `true`.
+6. Ativar a câmera, executar uma letra e selecionar **Identificar sinal**.
+7. Confirmar ou corrigir o resultado e mostrar o evento salvo.
+
+## Leitura correta do estado do sistema
+
+- `service: ready` confirma que a API está funcionando.
+- `manual_available: false` significa que `manual.joblib` ainda não foi carregado.
+- `status: model_unavailable` é um estado esperado antes do treinamento, não uma falha do servidor.
+- Avisos do MediaPipe sobre `feedback tensors` não impedem a inicialização do pipeline comum.
+- Um `404` de `favicon.ico` afeta apenas o ícone da aba do navegador.
 
 ## Perguntas prováveis
 

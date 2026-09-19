@@ -24,16 +24,23 @@ O MVP não afirma traduzir toda a Libras. Datilologia, sinais lexicais e express
 - Inserção manual, espaço, apagar, limpar e leitura em voz.
 - Contrato do reconhecedor e estado explícito de modelo indisponível.
 - Estrutura de auditoria para previsão, confiança, correção e versão do modelo.
+- Coletor sincronizado de landmarks manuais e faciais, sem vídeo por padrão.
+- Normalização geométrica e padronização temporal em 30 frames.
+- Treinamento SVM, separação por participante e geração de relatório de métricas.
+- Carregamento local de artefatos `manual.joblib` e `facial.joblib` quando disponíveis.
 - Testes do domínio e das rotas HTTP.
+
+O código do pipeline está implementado, mas o repositório não distribui um dataset científico nem um modelo treinado. Portanto, reconhecimento automático disponível e qualidade de classificação ainda dependem de coleta, treinamento e validação experimental.
 
 ## Próximas entregas
 
-1. Definir e versionar o conjunto de dados do alfabeto manual brasileiro.
-2. Implementar extração de landmarks com MediaPipe em Python compatível.
-3. Treinar e avaliar o classificador por pessoa, iluminação e mão dominante.
-4. Exportar o modelo para ONNX e conectá-lo ao contrato existente.
+1. Definir o vocabulário controlado, o protocolo de coleta e os critérios de descarte.
+2. Coletar amostras rotuladas de pelo menos três participantes, com consentimento e identificadores não pessoais.
+3. Treinar e avaliar o classificador manual separando participantes entre treino, validação e teste.
+4. Revisar o relatório e aprovar somente modelos que atendam aos critérios definidos pelo projeto.
 5. Adicionar estabilidade temporal e suporte separado para letras com movimento.
 6. Realizar validação de usabilidade com pessoas surdas e profissionais de Libras.
+7. Avaliar o módulo facial somente depois da validação da etapa manual.
 
 ## Critérios de qualidade
 
@@ -42,6 +49,8 @@ O MVP não afirma traduzir toda a Libras. Datilologia, sinais lexicais e express
 - Imagens não são persistidas por padrão.
 - A interface permanece utilizável por teclado e em telas pequenas.
 - O modelo só pode ser divulgado com métricas em dados não vistos no treinamento.
+- Participantes usados no treinamento não podem aparecer no teste final.
+- A inserção manual nunca deve ser apresentada como previsão da inteligência artificial.
 
 ## Fora do escopo desta etapa
 

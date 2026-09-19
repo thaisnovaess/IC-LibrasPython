@@ -2,39 +2,53 @@
 
 Aplicação local para apoiar a comunicação por datilologia em Libras, com câmera no navegador, confirmação ou correção de letras, formação de mensagem e persistência em SQLite.
 
-> **Estado atual:** a interface web e o fluxo de confirmação estão implementados. O classificador visual ainda não possui um modelo treinado e, por isso, a aplicação apresenta esse estado claramente e oferece inserção manual. O coletor legado com MediaPipe continua disponível para estudos e preparação de dados.
+> **Estado atual:** a interface web, o fluxo de confirmação e o pipeline científico estão implementados. O repositório não distribui um modelo treinado: até que `artifacts/models/manual.joblib` seja gerado, a aplicação informa que o classificador está indisponível e mantém a inserção manual como alternativa explícita.
 
 ## Início rápido da interface web
 
-A primeira versão web usa apenas a biblioteca padrão do Python e funciona no ambiente atual:
+A interface pode ser iniciada no mesmo ambiente Python 3.11 usado pela visão computacional:
 
-```bash
-python3.14 -m webapp.server
+```text
+python -m webapp.server
 ```
 
 Depois, abra `http://127.0.0.1:8000` no navegador. A câmera depende da permissão do navegador e permanece local; fotografias e vídeos não são gravados.
 
 Para executar a validação automatizada:
 
-```bash
-python3.14 -m unittest discover -v
+```text
+python -m unittest discover -v
 ```
 
 O escopo funcional, os limites do MVP e as próximas etapas estão em [`docs/ESCOPO_MVP.md`](docs/ESCOPO_MVP.md).
 
-Para a demonstração acadêmica focada no trabalho de Thais, consulte [`docs/APRESENTACAO_SEGUNDA.md`](docs/APRESENTACAO_SEGUNDA.md).
+Para a demonstração acadêmica focada no trabalho de Thais, consulte [`docs/APRESENTACAO_Geral.md`](docs/APRESENTACAO_Geral.md).
+
+Para coletar dados, treinar, ativar e validar o classificador manual, siga [`docs/OPERACAO_MODELO_MANUAL.md`](docs/OPERACAO_MODELO_MANUAL.md).
 
 ## Ambiente de visão computacional
 
-O coletor e o treinamento usam um ambiente separado com Python 3.11:
+O coletor, o treinamento e o reconhecedor local usam Python 3.11 e as versões fixadas em `requirements-vision.txt`.
+
+Windows PowerShell:
+
+```powershell
+py -3.11 -m venv venv
+.\venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements-vision.txt
+```
+
+Linux ou macOS:
 
 ```bash
 python3.11 -m venv venv
 source venv/bin/activate
+python -m pip install --upgrade pip
 python -m pip install -r requirements-vision.txt
 ```
 
-Coleta manual com expressão facial neutra, sem armazenar vídeo:
+Exemplo de uma coleta manual com expressão facial neutra, sem armazenar vídeo:
 
 ```bash
 python -m training.collect \
@@ -51,6 +65,14 @@ python -m training.train --modality manual
 
 O modelo será salvo em `artifacts/models/manual.joblib`. O relatório de avaliação será salvo ao lado do modelo. Não divulgue acurácia antes de coletar participantes suficientes e avaliar pessoas que não apareceram no treinamento.
 
+Depois do treinamento, encerre e inicie novamente o servidor. Os modelos são carregados durante a inicialização. Confira o estado em outro PowerShell:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/api/status | ConvertTo-Json -Depth 5
+```
+
+O reconhecimento manual está ativo somente quando `available` e `manual_available` aparecem como `true`.
+
 ## Estado das capacidades
 
 | Recurso | Situação atual |
@@ -61,10 +83,15 @@ O modelo será salvo em `artifacts/models/manual.joblib`. O relatório de avalia
 | Persistência de sessão e eventos | Implementado |
 | Leitura da mensagem em voz alta | Implementado pelo navegador |
 | Registro da previsão e da correção | Implementado no contrato e no banco |
+| Coleta sincronizada de mãos e face | Implementada em `training.collect` |
+| Extração e normalização de landmarks | Implementada |
+| Treinamento e relatório de métricas | Implementados em `training.train` |
 | Reconhecimento automático de letras | Aguardando dataset e modelo validado |
 | Tradução completa de Libras | Fora do escopo do MVP |
 
 ## Protótipo legado de coleta
+
+> Esta seção documenta o código original recebido e deve ser lida como histórico. O pipeline científico atual está em `training/` e `recognition/`, conforme o guia operacional indicado acima.
 
 O código original coleta coordenadas das mãos pela webcam e as armazena em SQLite, como base para estudos de reconhecimento de sinais da Língua Brasileira de Sinais (Libras).
 
