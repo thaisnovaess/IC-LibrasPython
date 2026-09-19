@@ -1,0 +1,278 @@
+{"kind":"deck","id":"pr/4tiloi","name":"Deck"}
+{"kind":"layout","layoutId":"3fefb288-c221-469e-b7c8-75a8c6ba2beb","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"3546865a-f06b-4a60-b09b-6fd1718ef7b0","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/pp52xl","slide":1,"title":"DETECÇÃO EM TEMPO REAL","textShapes":6}
+{"kind":"shape","id":"sh/v2p8zeds","slide":1,"bbox":[704,0,576,720]}
+{"kind":"textbox","id":"sh/g3yp8jud","slide":1,"text":"DETECÇÃO EM TEMPO REAL","textPreview":"DETECÇÃO EM TEMPO REAL","textChars":22,"textLines":1,"bbox":[754,58,430,24]}
+{"kind":"shape","id":"sh/6xw729cb","slide":1,"bbox":[680,0,56,720]}
+{"kind":"textbox","id":"sh/7y58vedw","slide":1,"text":"PROJETO INTEGRADO","textPreview":"PROJETO INTEGRADO","textChars":17,"textLines":1,"bbox":[64,64,196,34]}
+{"kind":"textbox","id":"sh/8zyp4juh","slide":1,"text":"Reconhecimento\nde sinais manuais\nda Libras","textPreview":"Reconhecimento | de sinais manuais | da Libras","textChars":42,"textLines":3,"bbox":[64,146,570,230]}
+{"kind":"textbox","id":"sh/t07qx4v2","slide":1,"text":"Visão computacional e aprendizado de máquina para apoiar uma comunicação mais acessível.","textPreview":"Visão computacional e aprendizado de máquina para apoiar uma comunicação mais acessível.","textChars":88,"textLines":1,"bbox":[68,412,525,104]}
+{"kind":"textbox","id":"sh/y9w7ypwf","slide":1,"text":"FOCO DA APRESENTAÇÃO","textPreview":"FOCO DA APRESENTAÇÃO","textChars":20,"textLines":1,"bbox":[68,590,250,22]}
+{"kind":"textbox","id":"sh/ja5orudk","slide":1,"text":"Abordagem manual de Thais Novaes","textPreview":"Abordagem manual de Thais Novaes","textChars":32,"textLines":1,"bbox":[68,619,500,36]}
+{"kind":"image","id":"im/4jatgna1","slide":1,"name":"","alt":"Detecção de pontos de referência nas duas mãos usando MediaPipe e OpenCV","bbox":[724,112,536,476]}
+{"kind":"notes","id":"nt/pp52xl","slide":1,"text":"Apresente o projeto como uma solução integrada. Explique que esta demonstração concentra a etapa manual por ser o recorte mais previsível para validação inicial.\n\nFontes:\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/1-IC_Thais-Novaes-Rodrigues-de-Lima_V07-Final.pdf, Figura 3\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/APRESENTACAO_SEGUNDA.md"}
+{"kind":"slide","id":"sl/7bewzh","slide":2,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":14}
+{"kind":"textbox","id":"sh/7ut0z25g","slide":2,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/sv2h87ml","slide":2,"text":"CONTEXTO","textPreview":"CONTEXTO","textChars":8,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/twbi1cn6","slide":2,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/uxkzah4r","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/fyt03mlc","slide":2,"text":"Da barreira de comunicação a uma resposta útil","textPreview":"Da barreira de comunicação a uma resposta útil","textChars":46,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/gz2hcrmx","slide":2,"text":"O sistema transforma uma sequência visual em texto, mantendo a pessoa no controle da mensagem.","textPreview":"O sistema transforma uma sequência visual em texto, mantendo a pessoa no controle da mensagem.","textChars":94,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"textbox","id":"sh/h0bi5w3i","slide":2,"text":"PROBLEMA","textPreview":"PROBLEMA","textChars":8,"textLines":1,"bbox":[66,228,130,24]}
+{"kind":"textbox","id":"sh/a1gzyd4n","slide":2,"text":"A comunicação depende de um intérprete ou de um interlocutor que conheça Libras.","textPreview":"A comunicação depende de um intérprete ou de um interlocutor que conheça Libras.","textChars":80,"textLines":1,"bbox":[66,264,446,126]}
+{"kind":"shape","id":"sh/v29gri58","slide":2,"bbox":[550,230,1,312]}
+{"kind":"textbox","id":"sh/ralk7alk","slide":2,"text":"OBJETIVO DO MVP","textPreview":"OBJETIVO DO MVP","textChars":15,"textLines":1,"bbox":[598,228,190,24]}
+{"kind":"textbox","id":"sh/69c3y54z","slide":2,"text":"Capturar sinais manuais, identificar letras ou sinais conhecidos e permitir confirmação ou correção antes de registrar a mensagem.","textPreview":"Capturar sinais manuais, identificar letras ou sinais conhecidos e permitir confirmação ou correção antes de registrar a mensagem.","textChars":130,"textLines":1,"bbox":[598,264,540,158]}
+{"kind":"textbox","id":"sh/twn2903a","slide":2,"text":"CAPTURA","textPreview":"CAPTURA","textChars":7,"textLines":1,"bbox":[598,472,142,34]}
+{"kind":"textbox","id":"sh/svel0vm5","slide":2,"text":"RECONHECIMENTO","textPreview":"RECONHECIMENTO","textChars":14,"textLines":1,"bbox":[754,472,190,34]}
+{"kind":"textbox","id":"sh/j6lk3ql8","slide":2,"text":"VALIDAÇÃO HUMANA","textPreview":"VALIDAÇÃO HUMANA","textChars":16,"textLines":1,"bbox":[958,472,206,34]}
+{"kind":"textbox","id":"sh/i5cjul4n","slide":2,"text":"Limite assumido","textPreview":"Limite assumido","textChars":15,"textLines":1,"bbox":[68,558,170,24]}
+{"kind":"textbox","id":"sh/5832503e","slide":2,"text":"O protótipo não traduz Libras completa. Ele valida um vocabulário controlado, começando por sinais manuais.","textPreview":"O protótipo não traduz Libras completa. Ele valida um vocabulário controlado, começando por sinais manuais.","textChars":107,"textLines":1,"bbox":[68,590,1058,56]}
+{"kind":"notes","id":"nt/7bewzh","slide":2,"text":"Defina o problema sem prometer tradução completa. O MVP trabalha com vocabulário controlado e validação humana.\n\nFontes:\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/1-IC_Thais-Novaes-Rodrigues-de-Lima_V07-Final.pdf\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/ESCOPO_MVP.md"}
+{"kind":"slide","id":"sl/t98phk","slide":3,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":15}
+{"kind":"textbox","id":"sh/cj2x8b2h","slide":3,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/bitgz61w","slide":3,"text":"ESCOPO","textPreview":"ESCOPO","textChars":6,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/qhkf61kr","slide":3,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/pgbyxwj6","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/of2x4r2l","slide":3,"text":"Um projeto, duas etapas complementares","textPreview":"Um projeto, duas etapas complementares","textChars":38,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/3e9gv6l0","slide":3,"text":"A arquitetura comporta mãos e face, mas a validação acontece em fases.","textPreview":"A arquitetura comporta mãos e face, mas a validação acontece em fases.","textChars":70,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"textbox","id":"sh/2d0f21kf","slide":3,"text":"AGORA","textPreview":"AGORA","textChars":5,"textLines":1,"bbox":[68,214,110,28]}
+{"kind":"shape","id":"sh/1crytw3u","slide":3,"bbox":[64,252,516,284]}
+{"kind":"textbox","id":"sh/grix0r29","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[94,282,72,60]}
+{"kind":"textbox","id":"sh/6hoby9cz","slide":3,"text":"Sinais manuais","textPreview":"Sinais manuais","textChars":14,"textLines":1,"bbox":[178,286,340,50]}
+{"kind":"textbox","id":"sh/7ixsredk","slide":3,"text":"• 21 pontos por mão\n• normalização e sequência temporal\n• classificação com SVM\n• confirmação e correção no front","textPreview":"• 21 pontos por mão | • normalização e sequência temporal | • classificação com SVM | • confirmação e correção no front","textChars":113,"textLines":4,"bbox":[96,362,424,136]}
+{"kind":"textbox","id":"sh/8j6t0ju5","slide":3,"text":"PRÓXIMA ETAPA","textPreview":"PRÓXIMA ETAPA","textChars":13,"textLines":1,"bbox":[704,214,176,28]}
+{"kind":"shape","id":"sh/tkfutovq","slide":3,"bbox":[700,252,516,284]}
+{"kind":"textbox","id":"sh/yt4bu9c3","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[730,282,72,60]}
+{"kind":"textbox","id":"sh/juxsnud8","slide":3,"text":"Expressões faciais","textPreview":"Expressões faciais","textChars":18,"textLines":1,"bbox":[814,286,340,50]}
+{"kind":"textbox","id":"sh/kv6twzut","slide":3,"text":"• pontos de referência da face\n• sinais não manuais\n• contexto da comunicação\n• fusão posterior com o módulo manual","textPreview":"• pontos de referência da face | • sinais não manuais | • contexto da comunicação | • fusão posterior com o módulo manual","textChars":115,"textLines":4,"bbox":[732,362,424,136]}
+{"kind":"textbox","id":"sh/lwfap4ve","slide":3,"text":"APRESENTAÇÃO DE SEGUNDA","textPreview":"APRESENTAÇÃO DE SEGUNDA","textChars":23,"textLines":1,"bbox":[470,576,336,34]}
+{"kind":"textbox","id":"sh/ap4bqpcr","slide":3,"text":"Prioridade: etapa 01, abordagem da Thais","textPreview":"Prioridade: etapa 01, abordagem da Thais","textChars":40,"textLines":1,"bbox":[382,624,510,30]}
+{"kind":"notes","id":"nt/t98phk","slide":3,"text":"Explique que os dois trabalhos foram consolidados em uma única arquitetura. O módulo facial permanece no roadmap, sem ser apresentado como validado.\n\nFontes:\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/1-IC_Thais-Novaes-Rodrigues-de-Lima_V07-Final.pdf\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/2-IC_Pedro-Straub-Mantoan_Final.pdf\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/APRESENTACAO_SEGUNDA.md"}
+{"kind":"slide","id":"sl/99h80b","slide":4,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":34}
+{"kind":"textbox","id":"sh/mlwz6l0j","slide":4,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/9onih0ja","slide":4,"text":"ARQUITETURA","textPreview":"ARQUITETURA","textChars":11,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/8neh8vip","slide":4,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/vq50jq10","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/upwjal0f","slide":4,"text":"Do gesto ao registro: o fluxo completo","textPreview":"Do gesto ao registro: o fluxo completo","textChars":38,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/hc7il0j6","slide":4,"text":"Cada etapa tem uma responsabilidade clara e pode ser validada separadamente.","textPreview":"Cada etapa tem uma responsabilidade clara e pode ser validada separadamente.","textChars":76,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"shape","id":"sh/wre1cvil","slide":4,"bbox":[62,256,154,238]}
+{"kind":"shape","id":"sh/bul0761w","slide":4,"bbox":[62,256,154,12]}
+{"kind":"textbox","id":"sh/atczy1kb","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[80,288,50,42]}
+{"kind":"textbox","id":"sh/4b6947mx","slide":4,"text":"Webcam","textPreview":"Webcam","textChars":6,"textLines":1,"bbox":[80,350,118,58]}
+{"kind":"textbox","id":"sh/5czqdcni","slide":4,"text":"sequência visual","textPreview":"sequência visual","textChars":16,"textLines":1,"bbox":[80,426,118,48]}
+{"kind":"textbox","id":"sh/i9or2x4r","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[213,330,28,30]}
+{"kind":"shape","id":"sh/3ax8b25c","slide":4,"bbox":[228,256,154,238]}
+{"kind":"shape","id":"sh/sfq987mt","slide":4,"bbox":[228,256,154,12]}
+{"kind":"textbox","id":"sh/dgzahc3e","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[246,288,50,42]}
+{"kind":"textbox","id":"sh/qd8r6x43","slide":4,"text":"MediaPipe","textPreview":"MediaPipe","textChars":9,"textLines":1,"bbox":[246,350,118,58]}
+{"kind":"textbox","id":"sh/reh8f2lo","slide":4,"text":"mãos e face","textPreview":"mãos e face","textChars":11,"textLines":1,"bbox":[246,426,118,48]}
+{"kind":"textbox","id":"sh/8jm9wnmp","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[379,330,28,30]}
+{"kind":"shape","id":"sh/tkvq58na","slide":4,"bbox":[394,256,154,238]}
+{"kind":"shape","id":"sh/9onydkb2","slide":4,"bbox":[394,256,154,12]}
+{"kind":"textbox","id":"sh/o3exkfah","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[412,288,50,42]}
+{"kind":"textbox","id":"sh/n2lgbatw","slide":4,"text":"Landmarks","textPreview":"Landmarks","textChars":9,"textLines":1,"bbox":[412,350,118,58]}
+{"kind":"textbox","id":"sh/m1cfi5sb","slide":4,"text":"coordenadas 3D","textPreview":"coordenadas 3D","textChars":14,"textLines":1,"bbox":[412,426,118,48]}
+{"kind":"textbox","id":"sh/xsnyhkby","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[545,330,28,30]}
+{"kind":"shape","id":"sh/wrexofad","slide":4,"bbox":[560,256,154,238]}
+{"kind":"shape","id":"sh/bq5gfats","slide":4,"bbox":[560,256,154,12]}
+{"kind":"textbox","id":"sh/apwfmps7","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[578,288,50,42]}
+{"kind":"textbox","id":"sh/lw7yl4bu","slide":4,"text":"Normalização","textPreview":"Normalização","textChars":12,"textLines":1,"bbox":[578,350,118,58]}
+{"kind":"textbox","id":"sh/kvyxszap","slide":4,"text":"escala e alinhamento","textPreview":"escala e alinhamento","textChars":20,"textLines":1,"bbox":[578,426,118,48]}
+{"kind":"textbox","id":"sh/i18vm187","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[711,330,28,30]}
+{"kind":"shape","id":"sh/32hcfm9c","slide":4,"bbox":[726,256,154,238]}
+{"kind":"shape","id":"sh/43qdorqx","slide":4,"bbox":[726,256,154,12]}
+{"kind":"textbox","id":"sh/54juhwri","slide":4,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[744,288,50,42]}
+{"kind":"textbox","id":"sh/q5svq183","slide":4,"text":"30 quadros","textPreview":"30 quadros","textChars":10,"textLines":1,"bbox":[744,350,118,58]}
+{"kind":"textbox","id":"sh/r61cj69o","slide":4,"text":"sequência padrão","textPreview":"sequência padrão","textChars":16,"textLines":1,"bbox":[744,426,118,48]}
+{"kind":"textbox","id":"sh/s7adsbq9","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[877,330,28,30]}
+{"kind":"shape","id":"sh/d8julgru","slide":4,"bbox":[892,256,154,238]}
+{"kind":"shape","id":"sh/e9svul8z","slide":4,"bbox":[892,256,154,12]}
+{"kind":"textbox","id":"sh/fu1wnq9k","slide":4,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[910,288,50,42]}
+{"kind":"textbox","id":"sh/nqxc761o","slide":4,"text":"SVM","textPreview":"SVM","textChars":3,"textLines":1,"bbox":[910,350,118,58]}
+{"kind":"textbox","id":"sh/mpovy10j","slide":4,"text":"classe + confiança","textPreview":"classe + confiança","textChars":18,"textLines":1,"bbox":[910,426,118,48]}
+{"kind":"textbox","id":"sh/9szu9gju","slide":4,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[1043,330,28,30]}
+{"kind":"shape","id":"sh/8rqd0bi9","slide":4,"bbox":[1058,256,154,238]}
+{"kind":"shape","id":"sh/vehcbq10","slide":4,"bbox":[1058,256,154,12]}
+{"kind":"textbox","id":"sh/at8v2l0f","slide":4,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1076,288,50,42]}
+{"kind":"textbox","id":"sh/xgzud0j6","slide":4,"text":"Front + DB","textPreview":"Front + DB","textChars":10,"textLines":1,"bbox":[1076,350,118,58]}
+{"kind":"textbox","id":"sh/wfqd4vil","slide":4,"text":"confirmar ou corrigir","textPreview":"confirmar ou corrigir","textChars":21,"textLines":1,"bbox":[1076,426,118,48]}
+{"kind":"shape","id":"sh/rydczm1w","slide":4,"bbox":[64,544,1152,80]}
+{"kind":"textbox","id":"sh/qx4bqh0b","slide":4,"text":"Princípio de projeto","textPreview":"Princípio de projeto","textChars":20,"textLines":1,"bbox":[90,567,198,24]}
+{"kind":"textbox","id":"sh/g3290nyt","slide":4,"text":"A predição sugere. A pessoa confirma ou corrige antes de a mensagem ser registrada.","textPreview":"A predição sugere. A pessoa confirma ou corrige antes de a mensagem ser registrada.","textChars":83,"textLines":1,"bbox":[302,562,846,36]}
+{"kind":"notes","id":"nt/99h80b","slide":4,"text":"Percorra o fluxo da esquerda para a direita. Destaque que a confirmação humana não é um improviso: ela faz parte do processo e cria rastreabilidade.\n\nFontes:\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/README.md\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/ESCOPO_MVP.md\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/1-IC_Thais-Novaes-Rodrigues-de-Lima_V07-Final.pdf"}
+{"kind":"slide","id":"sl/iyrse3","slide":5,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":14}
+{"kind":"textbox","id":"sh/18vm1g72","slide":5,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/e54nqlor","slide":5,"text":"VISÃO COMPUTACIONAL","textPreview":"VISÃO COMPUTACIONAL","textChars":19,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/f6d4zqpc","slide":5,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/s32lob6l","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/d4vmxg76","slide":5,"text":"A mão vira uma estrutura mensurável","textPreview":"A mão vira uma estrutura mensurável","textChars":35,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/q1k3m1of","slide":5,"text":"O MediaPipe representa cada mão por 21 pontos de referência.","textPreview":"O MediaPipe representa cada mão por 21 pontos de referência.","textChars":60,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"textbox","id":"sh/4f2lkr6p","slide":5,"text":"21","textPreview":"21","textChars":2,"textLines":1,"bbox":[806,214,180,90]}
+{"kind":"textbox","id":"sh/50bmtw7a","slide":5,"text":"pontos por mão","textPreview":"pontos por mão","textChars":14,"textLines":1,"bbox":[810,296,260,32]}
+{"kind":"shape","id":"sh/d03e1svy","slide":5,"bbox":[810,354,340,1]}
+{"kind":"textbox","id":"sh/czux8ned","slide":5,"text":"x, y, z","textPreview":"x, y, z","textChars":7,"textLines":1,"bbox":[810,364,192,28]}
+{"kind":"textbox","id":"sh/re1wzid8","slide":5,"text":"posição espacial de cada ponto","textPreview":"posição espacial de cada ponto","textChars":30,"textLines":1,"bbox":[1008,364,164,40]}
+{"kind":"shape","id":"sh/qdsf6dwn","slide":5,"bbox":[810,432,340,1]}
+{"kind":"textbox","id":"sh/pcjex8v2","slide":5,"text":"esquerda / direita","textPreview":"esquerda / direita","textChars":18,"textLines":1,"bbox":[810,442,192,28]}
+{"kind":"textbox","id":"sh/4bax43eh","slide":5,"text":"canais preservados separadamente","textPreview":"canais preservados separadamente","textChars":32,"textLines":1,"bbox":[1008,442,164,40]}
+{"kind":"shape","id":"sh/3a1wvydw","slide":5,"bbox":[810,510,340,1]}
+{"kind":"textbox","id":"sh/29sf2twb","slide":5,"text":"quadro a quadro","textPreview":"quadro a quadro","textChars":15,"textLines":1,"bbox":[810,520,192,28]}
+{"kind":"textbox","id":"sh/h8jet8vq","slide":5,"text":"movimento convertido em sequência","textPreview":"movimento convertido em sequência","textChars":33,"textLines":1,"bbox":[1008,520,164,40]}
+{"kind":"textbox","id":"sh/g7qd03el","slide":5,"text":"Fonte visual: trabalho de Thais Novaes, Figura 2.","textPreview":"Fonte visual: trabalho de Thais Novaes, Figura 2.","textChars":49,"textLines":1,"bbox":[70,603,620,24]}
+{"kind":"image","id":"im/61svyd03","slide":5,"name":"","alt":"Mapa dos 21 pontos de referência de uma mão no MediaPipe","bbox":[64,236,658,300]}
+{"kind":"notes","id":"nt/iyrse3","slide":5,"text":"Mostre que a imagem original deixa de ser o único dado. O modelo trabalha com pontos estruturados, mantendo mão esquerda e direita separadas.\n\nFontes:\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/1-IC_Thais-Novaes-Rodrigues-de-Lima_V07-Final.pdf, Figura 2\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/ESCOPO_MVP.md"}
+{"kind":"slide","id":"sl/tsamdg","slide":6,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":26}
+{"kind":"textbox","id":"sh/cjq10bmh","slide":6,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/rihk7q5c","slide":6,"text":"DADOS","textPreview":"DADOS","textChars":5,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/qh8jyl4r","slide":6,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/18j2d0ne","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/07al4vmt","slide":6,"text":"Preparar o dado reduz variações que não são o sinal","textPreview":"Preparar o dado reduz variações que não são o sinal","textChars":51,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/z61kbq58","slide":6,"text":"O objetivo é comparar o gesto, não a distância da câmera ou o tamanho da mão.","textPreview":"O objetivo é comparar o gesto, não a distância da câmera ou o tamanho da mão.","textChars":77,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"shape","id":"sh/e58j2l4n","slide":6,"bbox":[119,242,94,94]}
+{"kind":"textbox","id":"sh/9cj2h0na","slide":6,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[119,264,94,45]}
+{"kind":"textbox","id":"sh/obal8vmp","slide":6,"text":"Centralizar","textPreview":"Centralizar","textChars":11,"textLines":1,"bbox":[64,370,204,42]}
+{"kind":"textbox","id":"sh/m18jalgn","slide":6,"text":"pulso como origem","textPreview":"pulso como origem","textChars":17,"textLines":1,"bbox":[64,418,204,52]}
+{"kind":"textbox","id":"sh/n21kjqx8","slide":6,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[254,269,38,32]}
+{"kind":"shape","id":"sh/83a1cvyt","slide":6,"bbox":[349,242,94,94]}
+{"kind":"textbox","id":"sh/94j2l0fe","slide":6,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[349,264,94,45]}
+{"kind":"textbox","id":"sh/a5sje5gz","slide":6,"text":"Escalonar","textPreview":"Escalonar","textChars":9,"textLines":1,"bbox":[294,370,204,42]}
+{"kind":"textbox","id":"sh/v61knaxk","slide":6,"text":"tamanho relativo","textPreview":"tamanho relativo","textChars":16,"textLines":1,"bbox":[294,418,204,52]}
+{"kind":"textbox","id":"sh/w7a1gvy5","slide":6,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[484,269,38,32]}
+{"kind":"shape","id":"sh/x8j2p0fq","slide":6,"bbox":[579,242,94,94]}
+{"kind":"textbox","id":"sh/q9oj21gv","slide":6,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[579,264,94,45]}
+{"kind":"textbox","id":"sh/bah0b6h0","slide":6,"text":"Alinhar","textPreview":"Alinhar","textChars":7,"textLines":1,"bbox":[524,370,204,42]}
+{"kind":"textbox","id":"sh/fedgj2xs","slide":6,"text":"orientação consistente","textPreview":"orientação consistente","textChars":22,"textLines":1,"bbox":[524,418,204,52]}
+{"kind":"textbox","id":"sh/ed4zaxwn","slide":6,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[714,269,38,32]}
+{"kind":"shape","id":"sh/1gvylcfy","slide":6,"bbox":[809,242,94,94]}
+{"kind":"textbox","id":"sh/gfmhc7ed","slide":6,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[809,264,94,45]}
+{"kind":"textbox","id":"sh/rqtgf2xw","slide":6,"text":"Suavizar","textPreview":"Suavizar","textChars":8,"textLines":1,"bbox":[754,370,204,42]}
+{"kind":"textbox","id":"sh/6pkf6xwb","slide":6,"text":"menos ruído entre quadros","textPreview":"menos ruído entre quadros","textChars":25,"textLines":1,"bbox":[754,418,204,52]}
+{"kind":"textbox","id":"sh/tcvyhsf2","slide":6,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[944,269,38,32]}
+{"kind":"shape","id":"sh/srmh8neh","slide":6,"bbox":[1039,242,94,94]}
+{"kind":"textbox","id":"sh/bmxgrmd0","slide":6,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1039,264,94,45]}
+{"kind":"textbox","id":"sh/qlozihwf","slide":6,"text":"Reamostrar","textPreview":"Reamostrar","textChars":10,"textLines":1,"bbox":[984,370,204,42]}
+{"kind":"textbox","id":"sh/8rydcjux","slide":6,"text":"30 quadros por amostra","textPreview":"30 quadros por amostra","textChars":22,"textLines":1,"bbox":[984,418,204,52]}
+{"kind":"shape","id":"sh/9srelovi","slide":6,"bbox":[64,532,1152,100]}
+{"kind":"textbox","id":"sh/mpgva9c7","slide":6,"text":"Contrato da amostra","textPreview":"Contrato da amostra","textChars":19,"textLines":1,"bbox":[92,558,252,28]}
+{"kind":"textbox","id":"sh/nqpwjeds","slide":6,"text":"sequência comprimida + rótulo + participante + metadados de coleta","textPreview":"sequência comprimida + rótulo + participante + metadados de coleta","textChars":66,"textLines":1,"bbox":[352,554,790,42]}
+{"kind":"notes","id":"nt/tsamdg","slide":6,"text":"Explique que o pré-processamento torna as amostras comparáveis. A sequência final tem duração padronizada e metadados suficientes para auditoria.\n\nFontes:\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/1-IC_Thais-Novaes-Rodrigues-de-Lima_V07-Final.pdf\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/ESCOPO_MVP.md\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/README.md"}
+{"kind":"slide","id":"sl/302ga1","slide":7,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":20}
+{"kind":"textbox","id":"sh/4b254nup","slide":7,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/jat4bid4","slide":7,"text":"APRENDIZADO DE MÁQUINA","textPreview":"APRENDIZADO DE MÁQUINA","textChars":22,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/i9k32dcj","slide":7,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/h8bm98vy","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/w72l03ed","slide":7,"text":"Treinar sem misturar as pessoas","textPreview":"Treinar sem misturar as pessoas","textChars":31,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/v6t47yd8","slide":7,"text":"A divisão deve impedir que a mesma pessoa apareça em treino e teste.","textPreview":"A divisão deve impedir que a mesma pessoa apareça em treino e teste.","textChars":68,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"textbox","id":"sh/u503ytwn","slide":7,"text":"DIVISÃO PROPOSTA","textPreview":"DIVISÃO PROPOSTA","textChars":16,"textLines":1,"bbox":[66,220,230,24]}
+{"kind":"shape","id":"sh/94rm5ov2","slide":7,"bbox":[64,264,764,106]}
+{"kind":"shape","id":"sh/83ilw3eh","slide":7,"bbox":[82,286,500,62]}
+{"kind":"shape","id":"sh/m1szqx0j","slide":7,"bbox":[588,286,108,62]}
+{"kind":"shape","id":"sh/7m1gj21o","slide":7,"bbox":[702,286,108,62]}
+{"kind":"textbox","id":"sh/8nahs7i9","slide":7,"text":"70% treino","textPreview":"70% treino","textChars":10,"textLines":1,"bbox":[82,302,500,28]}
+{"kind":"textbox","id":"sh/9ojylcju","slide":7,"text":"15% val.","textPreview":"15% val.","textChars":8,"textLines":1,"bbox":[588,302,108,28]}
+{"kind":"textbox","id":"sh/yx8fmx07","slide":7,"text":"15% teste","textPreview":"15% teste","textChars":9,"textLines":1,"bbox":[702,302,108,28]}
+{"kind":"textbox","id":"sh/zy1gf21s","slide":7,"text":"Regra: participantes diferentes em cada conjunto","textPreview":"Regra: participantes diferentes em cada conjunto","textChars":48,"textLines":1,"bbox":[66,390,762,32]}
+{"kind":"shape","id":"sh/kzaho7id","slide":7,"bbox":[886,220,330,202]}
+{"kind":"textbox","id":"sh/l0jyhsjy","slide":7,"text":"MODELO BASELINE","textPreview":"MODELO BASELINE","textChars":15,"textLines":1,"bbox":[916,252,268,26]}
+{"kind":"textbox","id":"sh/at8fid0b","slide":7,"text":"SVM","textPreview":"SVM","textChars":3,"textLines":1,"bbox":[916,292,268,70]}
+{"kind":"textbox","id":"sh/buhgbi1w","slide":7,"text":"simples, local e adequado ao primeiro experimento","textPreview":"simples, local e adequado ao primeiro experimento","textChars":49,"textLines":1,"bbox":[916,360,260,46]}
+{"kind":"textbox","id":"sh/fydwjeho","slide":7,"text":"COMO AVALIAR","textPreview":"COMO AVALIAR","textChars":12,"textLines":1,"bbox":[66,478,180,24]}
+{"kind":"textbox","id":"sh/ex4vq9g3","slide":7,"text":"Acurácia","textPreview":"Acurácia","textChars":8,"textLines":1,"bbox":[66,526,194,34]}
+{"kind":"textbox","id":"sh/10feloze","slide":7,"text":"Precisão","textPreview":"Precisão","textChars":8,"textLines":1,"bbox":[286,526,194,34]}
+{"kind":"textbox","id":"sh/0z6dsjyt","slide":7,"text":"Recall","textPreview":"Recall","textChars":6,"textLines":1,"bbox":[506,526,194,34]}
+{"kind":"textbox","id":"sh/n2xwnyhk","slide":7,"text":"F1-score","textPreview":"F1-score","textChars":8,"textLines":1,"bbox":[726,526,194,34]}
+{"kind":"textbox","id":"sh/21ovutgz","slide":7,"text":"Matriz de confusão","textPreview":"Matriz de confusão","textChars":18,"textLines":1,"bbox":[946,526,244,34]}
+{"kind":"textbox","id":"sh/p4fep8zq","slide":7,"text":"Nenhuma métrica é apresentada antes de existir um conjunto real e separado por participante.","textPreview":"Nenhuma métrica é apresentada antes de existir um conjunto real e separado por participante.","textChars":92,"textLines":1,"bbox":[68,598,1080,34]}
+{"kind":"notes","id":"nt/302ga1","slide":7,"text":"Destaque que a validação por participante evita uma métrica artificialmente alta. Não apresente números de desempenho antes do experimento real.\n\nFontes:\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/1-IC_Thais-Novaes-Rodrigues-de-Lima_V07-Final.pdf\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/ESCOPO_MVP.md\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/APRESENTACAO_SEGUNDA.md"}
+{"kind":"slide","id":"sl/eg3xot","slide":8,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":22}
+{"kind":"textbox","id":"sh/ih8b6lc3","slide":8,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/5kjuh0vu","slide":8,"text":"EXPERIÊNCIA","textPreview":"EXPERIÊNCIA","textChars":11,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/4jqt8vu9","slide":8,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/r61cjadk","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/6lsva5cf","slide":8,"text":"A interface mantém a decisão com o usuário","textPreview":"A interface mantém a decisão com o usuário","textChars":42,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/t8jul0vq","slide":8,"text":"O reconhecimento é uma sugestão, não um registro automático irreversível.","textPreview":"O reconhecimento é uma sugestão, não um registro automático irreversível.","textChars":73,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"shape","id":"sh/s7adcvu5","slide":8,"bbox":[64,244,250,218]}
+{"kind":"shape","id":"sh/fa1cnadw","slide":8,"bbox":[88,270,54,54]}
+{"kind":"textbox","id":"sh/e9sve5cb","slide":8,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[88,282,54,28]}
+{"kind":"textbox","id":"sh/4je143e9","slide":8,"text":"Câmera","textPreview":"Câmera","textChars":6,"textLines":1,"bbox":[88,344,194,38]}
+{"kind":"textbox","id":"sh/5knid8vu","slide":8,"text":"captura a sequência","textPreview":"captura a sequência","textChars":19,"textLines":1,"bbox":[88,394,194,44]}
+{"kind":"textbox","id":"sh/ihwj2tw3","slide":8,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[314,328,38,36]}
+{"kind":"shape","id":"sh/ji50bydo","slide":8,"bbox":[352,244,250,218]}
+{"kind":"shape","id":"sh/s7y183e5","slide":8,"bbox":[376,270,54,54]}
+{"kind":"textbox","id":"sh/t87ih8vq","slide":8,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[376,282,54,28]}
+{"kind":"textbox","id":"sh/6lgj6twz","slide":8,"text":"Predição","textPreview":"Predição","textChars":8,"textLines":1,"bbox":[376,344,194,38]}
+{"kind":"textbox","id":"sh/rmp0fydk","slide":8,"text":"letra + confiança","textPreview":"letra + confiança","textChars":17,"textLines":1,"bbox":[376,394,194,44]}
+{"kind":"textbox","id":"sh/gby1cneh","slide":8,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[602,328,38,36]}
+{"kind":"shape","id":"sh/1c7ilsvm","slide":8,"bbox":[640,244,250,218]}
+{"kind":"shape","id":"sh/psnip8n6","slide":8,"bbox":[664,270,54,54]}
+{"kind":"textbox","id":"sh/oru1w36l","slide":8,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[664,282,54,28]}
+{"kind":"textbox","id":"sh/n6l0ni50","slide":8,"text":"Revisão","textPreview":"Revisão","textChars":7,"textLines":1,"bbox":[664,344,194,38]}
+{"kind":"textbox","id":"sh/25cjudof","slide":8,"text":"confirmar ou corrigir","textPreview":"confirmar ou corrigir","textChars":21,"textLines":1,"bbox":[664,394,194,44]}
+{"kind":"textbox","id":"sh/xwnitsn2","slide":8,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[890,328,38,36]}
+{"kind":"shape","id":"sh/cve10n6h","slide":8,"bbox":[928,244,250,218]}
+{"kind":"shape","id":"sh/bu50ri5w","slide":8,"bbox":[952,270,54,54]}
+{"kind":"textbox","id":"sh/atwjydob","slide":8,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[952,282,54,28]}
+{"kind":"textbox","id":"sh/d03ihony","slide":8,"text":"Mensagem","textPreview":"Mensagem","textChars":8,"textLines":1,"bbox":[952,344,194,38]}
+{"kind":"textbox","id":"sh/szahoj6d","slide":8,"text":"compor e registrar","textPreview":"compor e registrar","textChars":18,"textLines":1,"bbox":[952,394,194,44]}
+{"kind":"shape","id":"sh/i58fyp4v","slide":8,"bbox":[64,522,1152,104]}
+{"kind":"textbox","id":"sh/36hgrulg","slide":8,"text":"Rastreabilidade","textPreview":"Rastreabilidade","textChars":15,"textLines":1,"bbox":[94,550,190,28]}
+{"kind":"textbox","id":"sh/47qx0zm1","slide":8,"text":"o banco preserva a predição original, a correção aplicada e a versão do modelo","textPreview":"o banco preserva a predição original, a correção aplicada e a versão do modelo","textChars":78,"textLines":1,"bbox":[308,546,820,42]}
+{"kind":"notes","id":"nt/eg3xot","slide":8,"text":"Mostre que a opção de correção melhora a comunicação e também cria dados para analisar erros futuros. O banco registra a decisão humana e o contexto técnico.\n\nFontes:\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/README.md\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/ESCOPO_MVP.md"}
+{"kind":"slide","id":"sl/s4iqqx","slide":9,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":14}
+{"kind":"textbox","id":"sh/i1svehkf","slide":9,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/54je9wj6","slide":9,"text":"EVIDÊNCIAS","textPreview":"EVIDÊNCIAS","textChars":10,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/43axgr2l","slide":9,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/r61wb61w","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/q5sfi1kb","slide":9,"text":"O que já está validado e o que ainda falta","textPreview":"O que já está validado e o que ainda falta","textChars":42,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/d8jedwj2","slide":9,"text":"Separar implementação de evidência real torna a apresentação tecnicamente honesta.","textPreview":"Separar implementação de evidência real torna a apresentação tecnicamente honesta.","textChars":82,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"shape","id":"sh/s7axkr2h","slide":9,"bbox":[64,220,548,380]}
+{"kind":"textbox","id":"sh/7ahwz2ls","slide":9,"text":"VALIDADO LOCALMENTE","textPreview":"VALIDADO LOCALMENTE","textChars":19,"textLines":1,"bbox":[96,252,300,26]}
+{"kind":"textbox","id":"sh/69ov6xk7","slide":9,"text":"29","textPreview":"29","textChars":2,"textLines":1,"bbox":[96,294,120,76]}
+{"kind":"textbox","id":"sh/4vilgrml","slide":9,"text":"testes automatizados aprovados","textPreview":"testes automatizados aprovados","textChars":30,"textLines":1,"bbox":[218,318,330,38]}
+{"kind":"textbox","id":"sh/pwrm9wn6","slide":9,"text":"✓ API, banco e interface\n✓ contrato das amostras\n✓ normalização e sequência de 30 quadros\n✓ coletor sincronizado de mãos e face\n✓ script de treinamento e métricas","textPreview":"✓ API, banco e interface | ✓ contrato das amostras | ✓ normalização e sequência de 30 quadros | ✓ coletor sincronizado de mãos e face | ✓...","textChars":162,"textLines":5,"bbox":[98,390,454,168]}
+{"kind":"shape","id":"sh/2t03eh4f","slide":9,"bbox":[668,220,548,380]}
+{"kind":"textbox","id":"sh/3u947m50","slide":9,"text":"EVIDÊNCIA PENDENTE","textPreview":"EVIDÊNCIA PENDENTE","textChars":18,"textLines":1,"bbox":[700,252,300,26]}
+{"kind":"textbox","id":"sh/cjilkrmh","slide":9,"text":"REAL","textPreview":"REAL","textChars":4,"textLines":1,"bbox":[700,294,202,76]}
+{"kind":"textbox","id":"sh/dkrmdw32","slide":9,"text":"coleta e uso com participantes","textPreview":"coleta e uso com participantes","textChars":30,"textLines":1,"bbox":[884,318,286,42]}
+{"kind":"textbox","id":"sh/qx03i14b","slide":9,"text":"○ ambiente científico em Python 3.11\n○ base com pelo menos 3 participantes\n○ modelo manual treinado e versionado\n○ métricas em conjunto de teste separado\n○ validação com usuários da comunidade surda","textPreview":"○ ambiente científico em Python 3.11 | ○ base com pelo menos 3 participantes | ○ modelo manual treinado e versionado | ○ métricas em conj...","textChars":198,"textLines":5,"bbox":[702,390,454,168]}
+{"kind":"textbox","id":"sh/ri94bm5w","slide":9,"text":"Status do modelo na interface: indisponível até existir um artefato treinado válido.","textPreview":"Status do modelo na interface: indisponível até existir um artefato treinado válido.","textChars":84,"textLines":1,"bbox":[70,626,1100,30]}
+{"kind":"notes","id":"nt/s4iqqx","slide":9,"text":"Apresente os 29 testes como validação de software, não como acurácia do reconhecimento. A câmera, o modelo e o uso com participantes ainda exigem o ambiente científico e dados reais.\n\nFontes:\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/README.md\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/APRESENTACAO_SEGUNDA.md\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/ESCOPO_MVP.md"}
+{"kind":"slide","id":"sl/6xj1e8","slide":10,"title":"LIBRAS • VISÃO COMPUTACIONAL","textShapes":28}
+{"kind":"textbox","id":"sh/sn2h0fad","slide":10,"text":"LIBRAS • VISÃO COMPUTACIONAL","textPreview":"LIBRAS • VISÃO COMPUTACIONAL","textChars":28,"textLines":1,"bbox":[64,34,460,24]}
+{"kind":"textbox","id":"sh/rmtgra9s","slide":10,"text":"APRESENTAÇÃO","textPreview":"APRESENTAÇÃO","textChars":12,"textLines":1,"bbox":[836,34,332,24]}
+{"kind":"shape","id":"sh/6lkzy5s7","slide":10,"bbox":[64,684,1152,1]}
+{"kind":"textbox","id":"sh/50byp0rm","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1170,690,44,18]}
+{"kind":"textbox","id":"sh/4zihwva1","slide":10,"text":"Demonstração segura para segunda-feira","textPreview":"Demonstração segura para segunda-feira","textChars":38,"textLines":1,"bbox":[64,82,1152,64]}
+{"kind":"textbox","id":"sh/jy9gna9g","slide":10,"text":"Mesmo sem modelo treinado, o fluxo pode ser apresentado sem simular uma predição inexistente.","textPreview":"Mesmo sem modelo treinado, o fluxo pode ser apresentado sem simular uma predição inexistente.","textChars":93,"textLines":1,"bbox":[66,148,1080,36]}
+{"kind":"shape","id":"sh/ix0zu5sv","slide":10,"bbox":[66,226,48,48]}
+{"kind":"textbox","id":"sh/pwvi14rq","slide":10,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[66,236,48,24]}
+{"kind":"textbox","id":"sh/ovmh8zal","slide":10,"text":"Abrir a interface","textPreview":"Abrir a interface","textChars":17,"textLines":1,"bbox":[138,224,310,30]}
+{"kind":"textbox","id":"sh/y98n29gv","slide":10,"text":"mostrar câmera e área da mensagem","textPreview":"mostrar câmera e área da mensagem","textChars":33,"textLines":1,"bbox":[458,226,380,32]}
+{"kind":"shape","id":"sh/zahovexg","slide":10,"bbox":[66,302,48,48]}
+{"kind":"textbox","id":"sh/kbq54jy1","slide":10,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[66,312,48,24]}
+{"kind":"textbox","id":"sh/lcz6xofm","slide":10,"text":"Exibir o estado","textPreview":"Exibir o estado","textChars":15,"textLines":1,"bbox":[138,300,310,30]}
+{"kind":"textbox","id":"sh/alony9gz","slide":10,"text":"modelo indisponível de forma explícita","textPreview":"modelo indisponível de forma explícita","textChars":38,"textLines":1,"bbox":[458,302,380,32]}
+{"kind":"shape","id":"sh/bmh4ruxk","slide":10,"bbox":[66,378,48,48]}
+{"kind":"textbox","id":"sh/cnq50zyp","slide":10,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[66,388,48,24]}
+{"kind":"textbox","id":"sh/xozmt4fa","slide":10,"text":"Compor manualmente","textPreview":"Compor manualmente","textChars":18,"textLines":1,"bbox":[138,376,310,30]}
+{"kind":"textbox","id":"sh/uhsnatg3","slide":10,"text":"demonstrar confirmação e correção","textPreview":"demonstrar confirmação e correção","textChars":33,"textLines":1,"bbox":[458,378,380,32]}
+{"kind":"shape","id":"sh/vi1o3yxo","slide":10,"bbox":[66,454,48,48]}
+{"kind":"textbox","id":"sh/rmtkvqd0","slide":10,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[66,464,48,24]}
+{"kind":"textbox","id":"sh/qlkj2lwf","slide":10,"text":"Mostrar a coleta","textPreview":"Mostrar a coleta","textChars":16,"textLines":1,"bbox":[138,452,310,30]}
+{"kind":"textbox","id":"sh/dov2x0v6","slide":10,"text":"estrutura dos dados e metadados","textPreview":"estrutura dos dados e metadados","textChars":31,"textLines":1,"bbox":[458,454,380,32]}
+{"kind":"shape","id":"sh/snml4vel","slide":10,"bbox":[66,530,48,48]}
+{"kind":"textbox","id":"sh/fqdkzadc","slide":10,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[66,540,48,24]}
+{"kind":"textbox","id":"sh/ep4365wr","slide":10,"text":"Fechar com o experimento","textPreview":"Fechar com o experimento","textChars":24,"textLines":1,"bbox":[138,528,310,30]}
+{"kind":"textbox","id":"sh/1sv210v2","slide":10,"text":"coletar, treinar e medir","textPreview":"coletar, treinar e medir","textChars":24,"textLines":1,"bbox":[458,530,380,32]}
+{"kind":"shape","id":"sh/0rml8veh","slide":10,"bbox":[874,224,342,390]}
+{"kind":"textbox","id":"sh/nudk3ad8","slide":10,"text":"PRÓXIMOS PASSOS","textPreview":"PRÓXIMOS PASSOS","textChars":15,"textLines":1,"bbox":[906,258,270,24]}
+{"kind":"textbox","id":"sh/2t43a5wn","slide":10,"text":"Coletar","textPreview":"Coletar","textChars":7,"textLines":1,"bbox":[906,306,240,38]}
+{"kind":"textbox","id":"sh/kj61kfa1","slide":10,"text":"→ treinar o módulo manual","textPreview":"→ treinar o módulo manual","textChars":25,"textLines":1,"bbox":[906,348,266,32]}
+{"kind":"textbox","id":"sh/lkf2tkb6","slide":10,"text":"Medir","textPreview":"Medir","textChars":5,"textLines":1,"bbox":[906,402,240,38]}
+{"kind":"textbox","id":"sh/yhoji5cv","slide":10,"text":"→ validar por participante","textPreview":"→ validar por participante","textChars":26,"textLines":1,"bbox":[906,444,266,32]}
+{"kind":"textbox","id":"sh/zixkratg","slide":10,"text":"Integrar","textPreview":"Integrar","textChars":8,"textLines":1,"bbox":[906,498,240,38]}
+{"kind":"textbox","id":"sh/cv61gfup","slide":10,"text":"→ incorporar sinais faciais","textPreview":"→ incorporar sinais faciais","textChars":27,"textLines":1,"bbox":[906,540,266,32]}
+{"kind":"textbox","id":"sh/xwf2p0ba","slide":10,"text":"Resultado esperado: uma comunicação assistida, corrigível e evolutiva.","textPreview":"Resultado esperado: uma comunicação assistida, corrigível e evolutiva.","textChars":70,"textLines":1,"bbox":[66,633,770,30]}
+{"kind":"notes","id":"nt/6xj1e8","slide":10,"text":"Siga este roteiro se o modelo ainda não estiver treinado. Não apresente a entrada manual como resultado da inteligência artificial. Finalize com o plano de coleta, treinamento e integração facial.\n\nFontes:\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/APRESENTACAO_SEGUNDA.md\n- /Users/arthurcosta/Documents/Trabalhos/IC-LibrasPython/docs/ESCOPO_MVP.md\n- /tmp/codex-remote-attachments/01a0b679-c818-7730-bc71-715f57a5b598/4B580560-C7A5-4CCD-89A7-34DD698F1D0B/2-IC_Pedro-Straub-Mantoan_Final.pdf"}
