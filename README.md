@@ -1,8 +1,72 @@
 # IC-LibrasPython
 
-Protótipo em Python para coletar coordenadas das mãos pela webcam e armazená-las em SQLite, como base para estudos de reconhecimento de sinais da Língua Brasileira de Sinais (Libras).
+Aplicação local para apoiar a comunicação por datilologia em Libras, com câmera no navegador, confirmação ou correção de letras, formação de mensagem e persistência em SQLite.
 
-> **Estado atual:** coleta manual de dados. O projeto detecta e acompanha mãos com MediaPipe, mas ainda não identifica o significado dos sinais, não traduz Libras e não treina um modelo próprio. O nome do sinal é informado pelo operador.
+> **Estado atual:** a interface web e o fluxo de confirmação estão implementados. O classificador visual ainda não possui um modelo treinado e, por isso, a aplicação apresenta esse estado claramente e oferece inserção manual. O coletor legado com MediaPipe continua disponível para estudos e preparação de dados.
+
+## Início rápido da interface web
+
+A primeira versão web usa apenas a biblioteca padrão do Python e funciona no ambiente atual:
+
+```bash
+python3.14 -m webapp.server
+```
+
+Depois, abra `http://127.0.0.1:8000` no navegador. A câmera depende da permissão do navegador e permanece local; fotografias e vídeos não são gravados.
+
+Para executar a validação automatizada:
+
+```bash
+python3.14 -m unittest discover -v
+```
+
+O escopo funcional, os limites do MVP e as próximas etapas estão em [`docs/ESCOPO_MVP.md`](docs/ESCOPO_MVP.md).
+
+Para a demonstração acadêmica focada no trabalho de Thais, consulte [`docs/APRESENTACAO_SEGUNDA.md`](docs/APRESENTACAO_SEGUNDA.md).
+
+## Ambiente de visão computacional
+
+O coletor e o treinamento usam um ambiente separado com Python 3.11:
+
+```bash
+python3.11 -m venv venv
+source venv/bin/activate
+python -m pip install -r requirements-vision.txt
+```
+
+Coleta manual com expressão facial neutra, sem armazenar vídeo:
+
+```bash
+python -m training.collect \
+  --participant p01 \
+  --manual-label A \
+  --lighting uniforme
+```
+
+Treinamento prioritário do classificador manual:
+
+```bash
+python -m training.train --modality manual
+```
+
+O modelo será salvo em `artifacts/models/manual.joblib`. O relatório de avaliação será salvo ao lado do modelo. Não divulgue acurácia antes de coletar participantes suficientes e avaliar pessoas que não apareceram no treinamento.
+
+## Estado das capacidades
+
+| Recurso | Situação atual |
+| --- | --- |
+| Interface web responsiva e acessível | Implementado |
+| Câmera no navegador | Implementado |
+| Inserção, espaço, exclusão e limpeza | Implementado |
+| Persistência de sessão e eventos | Implementado |
+| Leitura da mensagem em voz alta | Implementado pelo navegador |
+| Registro da previsão e da correção | Implementado no contrato e no banco |
+| Reconhecimento automático de letras | Aguardando dataset e modelo validado |
+| Tradução completa de Libras | Fora do escopo do MVP |
+
+## Protótipo legado de coleta
+
+O código original coleta coordenadas das mãos pela webcam e as armazena em SQLite, como base para estudos de reconhecimento de sinais da Língua Brasileira de Sinais (Libras).
 
 Esta documentação descreve o código fornecido em `IC-LibrasPython-main.zip`. As propostas de evolução estão identificadas separadamente das funcionalidades existentes.
 

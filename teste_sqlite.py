@@ -1,23 +1,29 @@
+"""Demonstração manual e isolada de acesso ao SQLite."""
+
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
-db_path = Path(__file__).resolve().parent / "dados_libras.sqlite"
-print("Criando banco em:", db_path)
 
-conn = sqlite3.connect(db_path)
-cursor = conn.cursor()
+def main() -> None:
+    db_path = Path(__file__).resolve().parent / "dados_libras.sqlite"
+    print("Criando banco em:", db_path)
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS teste (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT
-)
-""")
+    with closing(sqlite3.connect(db_path)) as connection:
+        with connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                """
+                CREATE TABLE IF NOT EXISTS teste (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT
+                )
+                """
+            )
+            cursor.execute("INSERT INTO teste (nome) VALUES (?)", ("bom_dia",))
+            cursor.execute("SELECT * FROM teste")
+            print(cursor.fetchall())
 
-cursor.execute("INSERT INTO teste (nome) VALUES (?)", ("bom_dia",))
-conn.commit()
 
-cursor.execute("SELECT * FROM teste")
-print(cursor.fetchall())
-
-conn.close()
+if __name__ == "__main__":
+    main()

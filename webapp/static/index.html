@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Interface local para apoiar a comunicação por datilologia em Libras.">
+    <title>Libras em texto</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">Comunicação assistiva local</p>
+        <h1>Libras em texto</h1>
+      </div>
+      <div class="status-pill" id="system-status" role="status" aria-live="polite">
+        Verificando sistema
+      </div>
+    </header>
+
+    <main id="conteudo" class="workspace">
+      <section class="camera-panel" aria-labelledby="camera-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">1. Apresente o sinal</p>
+            <h2 id="camera-title">Câmera</h2>
+          </div>
+          <span id="camera-state" class="quiet-status">Câmera desligada</span>
+        </div>
+
+        <div class="camera-frame">
+          <video id="camera" autoplay playsinline muted aria-label="Imagem ao vivo da câmera"></video>
+          <div id="camera-empty" class="camera-empty">
+            <strong>Ative a câmera para começar</strong>
+            <span>A imagem fica neste dispositivo.</span>
+          </div>
+        </div>
+
+        <div class="camera-actions">
+          <button id="camera-toggle" class="primary-button" type="button">Ativar câmera</button>
+          <button id="analyze-frame" class="secondary-button" type="button" disabled>
+            Identificar sinal
+          </button>
+        </div>
+        <p id="camera-help" class="support-text">
+          Posicione uma mão por vez, com os dedos visíveis e boa iluminação.
+        </p>
+      </section>
+
+      <section class="result-panel" aria-labelledby="result-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">2. Confira o resultado</p>
+            <h2 id="result-title">Letra identificada</h2>
+          </div>
+        </div>
+
+        <div class="prediction-card" id="prediction-card">
+          <span class="prediction-letter" id="prediction-letter" aria-live="polite">?</span>
+          <div>
+            <strong id="prediction-label">Aguardando um sinal</strong>
+            <p id="prediction-detail">O modelo ainda não enviou uma previsão.</p>
+            <p id="facial-detail">Expressão facial: aguardando análise.</p>
+          </div>
+        </div>
+
+        <div class="confirmation-actions">
+          <button id="confirm-letter" class="primary-button" type="button" disabled>
+            Confirmar letra
+          </button>
+          <button id="correct-letter" class="secondary-button" type="button" disabled>
+            Corrigir
+          </button>
+        </div>
+
+        <div class="manual-entry">
+          <label for="manual-letter">Inserção manual durante o MVP</label>
+          <div class="manual-row">
+            <input
+              id="manual-letter"
+              type="text"
+              inputmode="text"
+              maxlength="1"
+              autocomplete="off"
+              aria-describedby="manual-help"
+            >
+            <button id="add-manual" class="secondary-button" type="button">Adicionar letra</button>
+          </div>
+          <p id="manual-help" class="support-text">
+            Use esta alternativa enquanto o classificador local está em treinamento.
+          </p>
+        </div>
+      </section>
+
+      <section class="message-panel" aria-labelledby="message-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">3. Construa a mensagem</p>
+            <h2 id="message-title">Mensagem</h2>
+          </div>
+          <span id="save-status" class="quiet-status" role="status" aria-live="polite">Iniciando sessão</span>
+        </div>
+
+        <output id="message-output" class="message-output" aria-label="Mensagem formada">
+          Sua mensagem aparecerá aqui.
+        </output>
+
+        <div class="message-actions">
+          <button id="add-space" class="secondary-button" type="button">Espaço</button>
+          <button id="remove-last" class="secondary-button" type="button">Apagar último</button>
+          <button id="clear-message" class="text-button" type="button">Limpar mensagem</button>
+          <button id="speak-message" class="primary-button" type="button">Ouvir mensagem</button>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="correction-dialog" aria-labelledby="correction-title">
+      <form method="dialog" id="correction-form">
+        <h2 id="correction-title">Corrigir letra</h2>
+        <p>Informe a letra correta. A previsão original será mantida no histórico.</p>
+        <label for="corrected-value">Letra correta</label>
+        <input id="corrected-value" type="text" maxlength="1" required autocomplete="off">
+        <div class="dialog-actions">
+          <button value="cancel" class="text-button" type="button" id="cancel-correction">Cancelar</button>
+          <button value="confirm" class="primary-button" type="submit">Salvar correção</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
