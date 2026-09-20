@@ -31,6 +31,11 @@
 
         <div class="camera-frame">
           <video id="camera" autoplay playsinline muted aria-label="Imagem ao vivo da câmera"></video>
+          <canvas id="hand-overlay" aria-hidden="true"></canvas>
+          <div id="live-preview" class="live-preview" role="status" aria-live="polite" hidden>
+            <span>Prévia</span>
+            <strong id="live-preview-value">—</strong>
+          </div>
           <div id="camera-empty" class="camera-empty">
             <strong>Ative a câmera para começar</strong>
             <span>A imagem fica neste dispositivo.</span>
@@ -75,20 +80,21 @@
         </div>
 
         <div class="manual-entry">
-          <label for="manual-letter">Inserção manual durante o MVP</label>
+          <label for="manual-letter">Digite uma letra ou frase</label>
           <div class="manual-row">
             <input
               id="manual-letter"
               type="text"
               inputmode="text"
-              maxlength="1"
+              maxlength="500"
               autocomplete="off"
+              placeholder="Ex.: Olá, como posso ajudar?"
               aria-describedby="manual-help"
             >
-            <button id="add-manual" class="secondary-button" type="button">Adicionar letra</button>
+            <button id="add-manual" class="secondary-button" type="button">Adicionar frase</button>
           </div>
           <p id="manual-help" class="support-text">
-            Use esta alternativa enquanto o classificador local está em treinamento.
+            O texto será adicionado à mensagem e salvo somente neste dispositivo.
           </p>
         </div>
       </section>
@@ -129,6 +135,7 @@
     </dialog>
 
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="/hand-overlay.js" defer></script>
     <script src="/app.js" defer></script>
   </body>
 </html>

@@ -185,6 +185,49 @@ class CommunicationRepository:
             facial_model_version=facial_model_version,
         )
 
+    def add_manual_text(self, session_id: str, text: str) -> int:
+        """Persiste uma frase como eventos compatíveis em uma única transação."""
+        rows = []
+        for character in text:
+            is_space = character == " "
+            rows.append(
+                (
+                    session_id,
+                    "space" if is_space else "letter",
+                    None,
+                    None,
+                    None if is_space else character,
+                    0,
+                    "manual",
+                    None,
+                    _utc_now(),
+                    None,
+                    None,
+                    None,
+                )
+            )
+        with self._connection() as connection:
+            connection.executemany(
+                """
+                INSERT INTO communication_events (
+                    session_id,
+                    event_type,
+                    predicted_letter,
+                    confidence,
+                    confirmed_letter,
+                    corrected,
+                    source,
+                    model_version,
+                    created_at,
+                    facial_expression,
+                    facial_confidence,
+                    facial_model_version
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                rows,
+            )
+        return len(rows)
+
     def list_events(self, session_id: str) -> list[CommunicationEvent]:
         with self._connection() as connection:
             rows: Iterable[sqlite3.Row] = connection.execute(

@@ -20,13 +20,19 @@
 - **decision**: A entrega demonstrável prioriza o pipeline de Thais. O módulo facial permanece integrado na arquitetura, mas entra após a validação do reconhecimento manual.
 - **reason**: Orientação do professor e menor incerteza técnica para a apresentação.
 
+### AD-004: Modelo público serve apenas como bootstrap local
+
+- **status**: active
+- **decision**: Usar o dataset Kaggle `williansoliveira/libras` para ativar 21 letras estáticas localmente, sem versionar ou redistribuir os dados e o modelo derivado.
+- **reason**: A fonte permite demonstrar o fluxo completo, mas o catálogo informa licença desconhecida e não fornece identidade de participantes para avaliação científica.
+
 ## Handoff
 
-- **feature**: reconhecimento-integrado-libras
-- **phase**: implementation and local contract validation
-- **completed**: contratos integrados, dataset, normalização, coletor, treino SVM, runtime, API, interface e 29 testes locais
-- **in progress**: preparação da demonstração manual orientada pelo professor
-- **next step**: criar ambiente Python 3.11, validar câmera e coletar amostras reais de pelo menos três participantes
-- **blockers**: câmera/MediaPipe não validados nesta máquina e modelos finais dependem de dataset real rotulado
-- **uncommitted files**: toda a implementação do MVP web e do reconhecimento integrado permanece sem commit por decisão do usuário
+- **feature**: preview-letra-frase-manual
+- **phase**: implementação concluída; UAT no navegador
+- **completed**: ambiente Python 3.11, modelo local de 21 letras, overlay dos 21 landmarks, prévia estável por maioria de 3 em 5 com confiança mediana mínima de 60%, identificação confirmável em 12 frames, inserção transacional de frases até 500 caracteres, 50 testes Python, 8 testes JavaScript e verificação independente PASS
+- **in progress**: validar visualmente a prévia e a limpeza imediata ao desligar a câmera
+- **next step**: executar UAT da câmera e da frase; depois, coletar amostras consentidas de pelo menos três participantes para a avaliação científica
+- **blockers**: a generalização ao vivo ainda depende do UAT na câmera; o modelo bootstrap e os dados não serão versionados por restrição de licença
+- **uncommitted files**: a feature permanece sem commit por decisão explícita do usuário
 - **branch**: main

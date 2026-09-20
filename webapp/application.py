@@ -24,6 +24,17 @@ def _letter(value: Any, *, optional: bool = False) -> str | None:
     return normalized
 
 
+def _manual_text(value: Any) -> str:
+    if not isinstance(value, str):
+        raise ValidationError("A frase deve ser um texto.")
+    normalized = " ".join(value.split())
+    if not normalized:
+        raise ValidationError("Digite uma frase antes de adicionar.")
+    if len(normalized) > 500:
+        raise ValidationError("A frase deve possuir no máximo 500 caracteres.")
+    return normalized
+
+
 class CommunicationApplication:
     def __init__(
         self,
@@ -121,6 +132,17 @@ class CommunicationApplication:
         )
         return asdict(event)
 
+    def add_text(self, payload: dict[str, Any]) -> dict[str, Any]:
+        session_id = payload.get("session_id")
+        if not isinstance(session_id, str) or not self.repository.session_exists(session_id):
+            raise LookupError("Sessão não encontrada.")
+        text = _manual_text(payload.get("text"))
+        added_characters = self.repository.add_manual_text(session_id, text)
+        return {"text": text, "added_characters": added_characters}
+
     def predict(self, frames: list[bytes] | None = None) -> tuple[int, dict[str, Any]]:
         result = self.recognizer.recognize_sequence(frames or [])
         return (503 if result.status == "model_unavailable" else 200, asdict(result))
+
+    def landmarks(self, image: bytes) -> dict[str, Any]:
+        return self.recognizer.inspect_frame(image)

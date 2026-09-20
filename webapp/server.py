@@ -49,6 +49,17 @@ class RequestHandler(BaseHTTPRequestHandler):
             raise ValidationError("O JSON deve ser um objeto.")
         return payload
 
+    def _decode_data_url(self, encoded: object) -> bytes:
+        if not isinstance(encoded, str) or "," not in encoded:
+            raise ValidationError("Imagem em formato data URL inválido.")
+        try:
+            image = base64.b64decode(encoded.split(",", 1)[1], validate=True)
+        except (ValueError, base64.binascii.Error) as exc:
+            raise ValidationError("Imagem em base64 inválida.") from exc
+        if not image or len(image) > MAX_BODY_BYTES:
+            raise ValidationError("Cada imagem deve possuir no máximo 2 MB.")
+        return image
+
     def _serve_static(self, request_path: str) -> None:
         relative = "index.html" if request_path == "/" else unquote(request_path.lstrip("/"))
         candidate = (STATIC_DIR / relative).resolve()
@@ -91,6 +102,16 @@ class RequestHandler(BaseHTTPRequestHandler):
             if path == "/api/events":
                 self._json(HTTPStatus.CREATED, self.application.add_event(self._read_json()))
                 return
+            if path == "/api/text":
+                self._json(HTTPStatus.CREATED, self.application.add_text(self._read_json()))
+                return
+            if path == "/api/landmarks":
+                request = self._read_json()
+                self._json(
+                    HTTPStatus.OK,
+                    self.application.landmarks(self._decode_data_url(request.get("frame"))),
+                )
+                return
             if path == "/api/predict":
                 frames = None
                 if int(self.headers.get("Content-Length", "0")) > 0:
@@ -98,17 +119,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                     encoded_frames = request.get("frames")
                     if not isinstance(encoded_frames, list) or not 1 <= len(encoded_frames) <= 30:
                         raise ValidationError("Envie entre 1 e 30 imagens na sequência.")
-                    frames = []
-                    for encoded in encoded_frames:
-                        if not isinstance(encoded, str) or "," not in encoded:
-                            raise ValidationError("Imagem em formato data URL inválido.")
-                        try:
-                            image = base64.b64decode(encoded.split(",", 1)[1], validate=True)
-                        except (ValueError, base64.binascii.Error) as exc:
-                            raise ValidationError("Imagem em base64 inválida.") from exc
-                        if not image or len(image) > MAX_BODY_BYTES:
-                            raise ValidationError("Cada imagem deve possuir no máximo 2 MB.")
-                        frames.append(image)
+                    frames = [self._decode_data_url(encoded) for encoded in encoded_frames]
                 status, payload = self.application.predict(frames)
                 self._json(status, payload)
                 return
@@ -124,10 +135,17 @@ class RequestHandler(BaseHTTPRequestHandler):
         print(f"[{self.log_date_time_string()}] {format % args}")
 
 
-def build_server(host: str, port: int, database_path: str | Path) -> ThreadingHTTPServer:
+def build_server(
+    host: str,
+    port: int,
+    database_path: str | Path,
+    models_directory: str | Path = "artifacts/models",
+    recognizer=None,
+) -> ThreadingHTTPServer:
+    selected_recognizer = recognizer or build_recognizer(str(models_directory))
     application = CommunicationApplication(
         CommunicationRepository(database_path),
-        recognizer=build_recognizer(),
+        recognizer=selected_recognizer,
     )
     handler = type("ConfiguredRequestHandler", (RequestHandler,), {"application": application})
     return ThreadingHTTPServer((host, port), handler)

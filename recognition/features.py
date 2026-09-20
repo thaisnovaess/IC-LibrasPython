@@ -99,6 +99,26 @@ def summarize_sequence(sequence: Sequence[Landmarks]) -> list[float]:
     return means + deviations + displacement
 
 
+def static_manual_features(frames: list[dict]) -> list[float]:
+    """Resume uma mão normalizada em 63 valores médios independentes do canal."""
+    detected: list[Landmarks] = []
+    for frame in frames:
+        points = frame.get("right_hand") or frame.get("left_hand")
+        if points:
+            detected.append(normalize_hand(points))
+    if not detected:
+        raise ValueError("Nenhuma mão detectada na sequência.")
+
+    flattened = [[coordinate for point in hand for coordinate in point] for hand in detected]
+    features = [
+        sum(hand[index] for hand in flattened) / len(flattened)
+        for index in range(HAND_POINTS * 3)
+    ]
+    if not all(math.isfinite(value) for value in features):
+        raise ValueError("Os landmarks da mão produziram características não finitas.")
+    return features
+
+
 def modality_features(frames: list[dict], modality: str) -> list[float]:
     if modality == "facial":
         detected = [normalize_face(frame["face"]) for frame in frames if frame.get("face")]

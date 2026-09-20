@@ -1,11 +1,18 @@
 from __future__ import annotations
 
+import math
 import tempfile
 import unittest
 from pathlib import Path
 
 from recognition.dataset import SampleMetadata, load_sample, save_sample, validate_frames
-from recognition.features import modality_features, normalize_face, normalize_hand, resample_sequence
+from recognition.features import (
+    modality_features,
+    normalize_face,
+    normalize_hand,
+    resample_sequence,
+    static_manual_features,
+)
 
 
 def landmarks(count: int, offset: float = 0.0) -> list[list[float]]:
@@ -73,3 +80,24 @@ class FeatureTest(unittest.TestCase):
         result = modality_features([{"face": landmarks(468)}], "facial")
 
         self.assertEqual(468 * 3 * 3, len(result))
+
+    def test_static_manual_features_return_63_finite_values(self) -> None:
+        result = static_manual_features(
+            [
+                {"left_hand": landmarks(21), "right_hand": None},
+                {"left_hand": landmarks(21, 0.5), "right_hand": None},
+            ]
+        )
+
+        self.assertEqual(21 * 3, len(result))
+        self.assertTrue(all(math.isfinite(value) for value in result))
+
+    def test_static_manual_features_accept_either_hand_channel(self) -> None:
+        left = static_manual_features([{"left_hand": landmarks(21), "right_hand": None}])
+        right = static_manual_features([{"left_hand": None, "right_hand": landmarks(21)}])
+
+        self.assertEqual(left, right)
+
+    def test_static_manual_features_require_a_detected_hand(self) -> None:
+        with self.assertRaisesRegex(ValueError, "Nenhuma mão"):
+            static_manual_features([{"left_hand": None, "right_hand": None}])

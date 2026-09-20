@@ -37,6 +37,12 @@ class UnavailableRecognizer:
             ),
         )
 
+    def detect_hands(self, _image: bytes) -> list:
+        return []
+
+    def inspect_frame(self, _image: bytes) -> dict:
+        return {"hands": [], "preview": None}
+
     def recognize(self, _image: bytes | None = None) -> IntegratedPrediction:
         return self.recognize_sequence([])
 

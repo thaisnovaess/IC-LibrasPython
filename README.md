@@ -2,7 +2,7 @@
 
 Aplicação local para apoiar a comunicação por datilologia em Libras, com câmera no navegador, confirmação ou correção de letras, formação de mensagem e persistência em SQLite.
 
-> **Estado atual:** a interface web, o fluxo de confirmação e o pipeline científico estão implementados. O repositório não distribui um modelo treinado: até que `artifacts/models/manual.joblib` seja gerado, a aplicação informa que o classificador está indisponível e mantém a inserção manual como alternativa explícita.
+> **Estado atual:** a interface web, o fluxo de confirmação, o pipeline científico e o bootstrap das 21 letras estáticas estão implementados. O repositório não distribui o modelo treinado porque a fonte pública consultada informa licença desconhecida. Gere `artifacts/models/manual.joblib` localmente pelo guia operacional; sem esse arquivo, a aplicação mantém a inserção manual como alternativa explícita.
 
 ## Início rápido da interface web
 
@@ -57,7 +57,13 @@ python -m training.collect \
   --lighting uniforme
 ```
 
-Treinamento prioritário do classificador manual:
+Bootstrap prioritário para a demonstração com dataset público extraído:
+
+```bash
+python -m training.bootstrap_alphabet --dataset /caminho/para/libras
+```
+
+Treinamento científico com amostras próprias separadas por participante:
 
 ```bash
 python -m training.train --modality manual
@@ -86,7 +92,7 @@ O reconhecimento manual está ativo somente quando `available` e `manual_availab
 | Coleta sincronizada de mãos e face | Implementada em `training.collect` |
 | Extração e normalização de landmarks | Implementada |
 | Treinamento e relatório de métricas | Implementados em `training.train` |
-| Reconhecimento automático de letras | Aguardando dataset e modelo validado |
+| Reconhecimento automático de 21 letras estáticas | Implementado; exige gerar o modelo bootstrap local |
 | Tradução completa de Libras | Fora do escopo do MVP |
 
 ## Protótipo legado de coleta

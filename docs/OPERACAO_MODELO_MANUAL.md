@@ -6,7 +6,6 @@ Este guia descreve o caminho entre um repositório recém-clonado e o reconhecim
 
 Ao final do processo devem existir:
 
-- amostras comprimidas em `data/samples/`;
 - modelo manual em `artifacts/models/manual.joblib`;
 - relatório em `artifacts/models/manual-report.json`;
 - endpoint `/api/status` com `available: true` e `manual_available: true`.
@@ -18,8 +17,8 @@ O módulo facial pode permanecer indisponível durante a primeira etapa.
 Abra o PowerShell na raiz do repositório:
 
 ```powershell
-py -3.11 -m venv venv
-.\venv\Scripts\Activate.ps1
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements-vision.txt
 ```
@@ -30,9 +29,42 @@ Confirme as dependências:
 python -c "import cv2, joblib, mediapipe, numpy, sklearn; print('Ambiente científico pronto')"
 ```
 
-Se a ativação estiver bloqueada, use `venv\Scripts\python.exe` no lugar de `python` nos comandos seguintes.
+Se a ativação estiver bloqueada, use `.venv\Scripts\python.exe` no lugar de `python` nos comandos seguintes.
 
-## 2. Definir o piloto de coleta
+## 2. Gerar o modelo bootstrap para a demonstração
+
+Este é o caminho mais rápido para ativar as 21 letras estáticas da apresentação. Baixe a versão 1 do dataset público [Libras, de Willians Oliveira, no Kaggle](https://www.kaggle.com/datasets/williansoliveira/libras) e extraia o conteúdo. O diretório informado ao comando precisa conter as pastas `train/` e `test/`.
+
+O catálogo consultado informa licença `Unknown`. Use os dados e o modelo derivado apenas como bootstrap acadêmico local. Não publique nem versione as imagens ou o artefato treinado sem confirmar a autorização de redistribuição.
+
+Execute:
+
+```powershell
+python -m training.bootstrap_alphabet `
+  --dataset "C:\caminho\para\libras" `
+  --train-per-class 80 `
+  --validation-per-class 20 `
+  --test-per-class 30
+```
+
+O treinamento gera 21 classes estáticas: `A, B, C, D, E, F, G, I, L, M, N, O, P, Q, R, S, T, U, V, W, Y`. As letras dinâmicas `H, J, K, X, Z` não fazem parte desse modelo.
+
+O relatório identifica a avaliação como `provider_split_not_participant_independent`. A acurácia obtida nesse split mede apenas o bootstrap fornecido pelo dataset. Ela não comprova generalização para novas pessoas, câmeras ou condições de iluminação.
+
+Confira os artefatos:
+
+```powershell
+Test-Path .\artifacts\models\manual.joblib
+Test-Path .\artifacts\models\manual-report.json
+```
+
+Os dois comandos devem retornar `True`.
+
+## 3. Coletar dados próprios para avaliação científica
+
+O bootstrap permite demonstrar o fluxo. A avaliação científica exige amostras consentidas e separação por participante.
+
+### Definir o piloto de coleta
 
 Antes de abrir a câmera, registre:
 
@@ -55,7 +87,7 @@ Esses valores são mínimos para o código executar, não evidência de qualidad
 
 Use identificadores não pessoais, como `p01`, `p02` e `p03`. Não use nomes, e-mail ou matrícula como identificador.
 
-## 3. Coletar as amostras
+### Coletar as amostras
 
 Cada execução coleta uma amostra de três segundos por padrão e salva landmarks e metadados, sem vídeo bruto:
 
@@ -77,7 +109,7 @@ Após a coleta, confira a quantidade de arquivos:
 (Get-ChildItem .\data\samples\sample-*.json.gz).Count
 ```
 
-## 4. Treinar o classificador manual
+### Treinar o classificador manual com dados próprios
 
 Com a coleta concluída:
 
@@ -87,16 +119,7 @@ python -m training.train --modality manual
 
 O script separa participantes entre treino, validação e teste, executa busca de hiperparâmetros e gera o modelo e o relatório.
 
-Confira os artefatos:
-
-```powershell
-Test-Path .\artifacts\models\manual.joblib
-Test-Path .\artifacts\models\manual-report.json
-```
-
-Os dois comandos devem retornar `True`.
-
-## 5. Revisar o relatório
+### Revisar o relatório científico
 
 Abra `artifacts/models/manual-report.json` e confira:
 
@@ -110,7 +133,7 @@ Abra `artifacts/models/manual-report.json` e confira:
 
 Não divulgue apenas a acurácia. Registre também quantidade de participantes, quantidade de amostras, classes avaliadas e separação utilizada.
 
-## 6. Reiniciar e validar a aplicação
+## 4. Reiniciar e validar a aplicação
 
 Os modelos são carregados quando o servidor inicia. Se ele estava aberto durante o treinamento, encerre-o com `Ctrl+C` e execute novamente:
 
@@ -139,7 +162,7 @@ Estado esperado para reconhecimento manual ativo:
 
 `facial_available: false` continua sendo aceitável nesta etapa.
 
-## 7. Fazer o teste funcional
+## 5. Fazer o teste funcional
 
 1. Abra `http://127.0.0.1:8000`.
 2. Permita o uso da câmera.
@@ -148,6 +171,8 @@ Estado esperado para reconhecimento manual ativo:
 5. Confirme ou corrija a letra.
 6. Verifique se a mensagem foi atualizada e salva localmente.
 7. Repita com uma pessoa que não participou do treinamento.
+
+O detector precisa enxergar uma mão completa, com os dedos visíveis. Para o bootstrap, teste primeiro uma das 21 letras estáticas listadas acima. Fundo simples, boa iluminação e mão próxima da câmera reduzem falhas de detecção.
 
 ## Demonstração quando o modelo ainda não existe
 

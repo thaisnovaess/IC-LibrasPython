@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
@@ -101,3 +102,42 @@ class CommunicationApplicationTest(unittest.TestCase):
                     "facial_confidence": 2,
                 }
             )
+
+    def test_persists_complete_manual_phrase_with_accents(self) -> None:
+        result = self.application.add_text(
+            {"session_id": self.session_id, "text": "  Olá,\n  mundo!  "}
+        )
+
+        session = self.application.session(self.session_id)
+
+        self.assertEqual("Olá, mundo!", result["text"])
+        self.assertEqual(11, result["added_characters"])
+        self.assertEqual("Olá, mundo!", session["text"])
+        self.assertEqual(11, len(session["events"]))
+
+    def test_rejects_empty_or_oversized_manual_phrase(self) -> None:
+        with self.assertRaisesRegex(ValidationError, "Digite uma frase"):
+            self.application.add_text({"session_id": self.session_id, "text": " \n "})
+
+        with self.assertRaisesRegex(ValidationError, "no máximo 500"):
+            self.application.add_text({"session_id": self.session_id, "text": "a" * 501})
+
+    def test_rolls_back_complete_phrase_when_one_character_fails(self) -> None:
+        with self.application.repository._connection() as connection:
+            connection.execute(
+                """
+                CREATE TRIGGER reject_exclamation
+                BEFORE INSERT ON communication_events
+                WHEN NEW.confirmed_letter = '!'
+                BEGIN
+                    SELECT RAISE(ABORT, 'fixture failure');
+                END;
+                """
+            )
+
+        with self.assertRaisesRegex(sqlite3.IntegrityError, "fixture failure"):
+            self.application.add_text(
+                {"session_id": self.session_id, "text": "AB!C"}
+            )
+
+        self.assertEqual([], self.application.session(self.session_id)["events"])

@@ -6,6 +6,12 @@ const state = {
   candidate: null,
   recognizerAvailable: false,
   message: "",
+  trackingFrame: null,
+  trackingBusy: false,
+  trackingGeneration: 0,
+  lastTrackingAt: 0,
+  trackingPaused: false,
+  previewHistory: [],
 };
 
 const elements = {
@@ -13,6 +19,9 @@ const elements = {
   cameraState: document.querySelector("#camera-state"),
   cameraFrame: document.querySelector(".camera-frame"),
   video: document.querySelector("#camera"),
+  handOverlay: document.querySelector("#hand-overlay"),
+  livePreview: document.querySelector("#live-preview"),
+  livePreviewValue: document.querySelector("#live-preview-value"),
   cameraToggle: document.querySelector("#camera-toggle"),
   analyzeFrame: document.querySelector("#analyze-frame"),
   predictionLetter: document.querySelector("#prediction-letter"),
@@ -35,6 +44,105 @@ const elements = {
   cancelCorrection: document.querySelector("#cancel-correction"),
   toast: document.querySelector("#toast"),
 };
+
+const trackingCanvas = document.createElement("canvas");
+trackingCanvas.width = 640;
+trackingCanvas.height = 360;
+
+function clearHandOverlay() {
+  const context = elements.handOverlay.getContext("2d");
+  window.HandOverlay.draw(context, [], {
+    width: elements.handOverlay.width,
+    height: elements.handOverlay.height,
+    videoWidth: elements.video.videoWidth || trackingCanvas.width,
+    videoHeight: elements.video.videoHeight || trackingCanvas.height,
+  });
+}
+
+function drawHandOverlay(hands) {
+  const bounds = elements.cameraFrame.getBoundingClientRect();
+  const width = Math.max(1, Math.round(bounds.width));
+  const height = Math.max(1, Math.round(bounds.height));
+  if (elements.handOverlay.width !== width || elements.handOverlay.height !== height) {
+    elements.handOverlay.width = width;
+    elements.handOverlay.height = height;
+  }
+  const context = elements.handOverlay.getContext("2d");
+  window.HandOverlay.draw(context, hands, {
+    width,
+    height,
+    videoWidth: elements.video.videoWidth || trackingCanvas.width,
+    videoHeight: elements.video.videoHeight || trackingCanvas.height,
+  });
+}
+
+function renderLivePreview(preview) {
+  elements.livePreview.hidden = !preview;
+  elements.livePreviewValue.textContent = preview
+    ? `${preview.letter} · ${Math.round(preview.confidence * 100)}%`
+    : "—";
+}
+
+function resetLivePreview() {
+  state.previewHistory = [];
+  renderLivePreview(null);
+}
+
+function stopHandTracking() {
+  state.trackingGeneration += 1;
+  if (state.trackingFrame !== null) window.cancelAnimationFrame(state.trackingFrame);
+  state.trackingFrame = null;
+  state.trackingBusy = false;
+  clearHandOverlay();
+  resetLivePreview();
+}
+
+function startHandTracking() {
+  stopHandTracking();
+  if (!state.recognizerAvailable) return;
+  const generation = state.trackingGeneration;
+  const context = trackingCanvas.getContext("2d");
+
+  const track = (timestamp) => {
+    if (!state.stream || generation !== state.trackingGeneration) return;
+    state.trackingFrame = window.requestAnimationFrame(track);
+    if (
+      state.trackingBusy
+      || state.trackingPaused
+      || elements.video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA
+      || timestamp - state.lastTrackingAt < 250
+    ) return;
+
+    state.trackingBusy = true;
+    state.lastTrackingAt = timestamp;
+    context.drawImage(elements.video, 0, 0, trackingCanvas.width, trackingCanvas.height);
+    api("/api/landmarks", {
+      method: "POST",
+      body: JSON.stringify({ frame: trackingCanvas.toDataURL("image/jpeg", 0.55) }),
+    })
+      .then(({ hands, preview }) => {
+        if (generation !== state.trackingGeneration) return;
+        drawHandOverlay(hands);
+        const stabilized = window.HandOverlay.updatePreview(state.previewHistory, preview);
+        state.previewHistory = stabilized.history;
+        renderLivePreview(stabilized.stable);
+        elements.cameraState.textContent = hands.length
+          ? `Mão detectada · ${hands[0].length} pontos`
+          : "Câmera ativa · procurando mão";
+      })
+      .catch(() => {
+        if (generation !== state.trackingGeneration) return;
+        clearHandOverlay();
+        resetLivePreview();
+        elements.cameraState.textContent = "Câmera ativa · rastreamento indisponível";
+      })
+      .finally(() => {
+        if (generation === state.trackingGeneration) state.trackingBusy = false;
+      });
+  };
+
+  state.trackingFrame = window.requestAnimationFrame(track);
+}
 
 function normalizeLetter(value) {
   const letter = value.trim().toUpperCase();
@@ -87,16 +195,27 @@ async function recordEvent(eventType, extra = {}) {
   }
 }
 
-async function addManualLetter() {
-  const letter = normalizeLetter(elements.manualLetter.value);
-  if (!letter) {
-    showToast("Informe uma única letra entre A e Z.");
+async function addManualText() {
+  const text = elements.manualLetter.value;
+  if (!text.trim()) {
+    showToast("Digite uma letra ou frase antes de adicionar.");
     elements.manualLetter.focus();
     return;
   }
-  await recordEvent("letter", { confirmed_letter: letter, source: "manual" });
-  elements.manualLetter.value = "";
-  elements.manualLetter.focus();
+  elements.saveStatus.textContent = "Salvando";
+  try {
+    await api("/api/text", {
+      method: "POST",
+      body: JSON.stringify({ session_id: state.sessionId, text }),
+    });
+    await refreshSession();
+    elements.saveStatus.textContent = "Mensagem salva neste dispositivo";
+    elements.manualLetter.value = "";
+    elements.manualLetter.focus();
+  } catch (error) {
+    elements.saveStatus.textContent = "Falha ao salvar";
+    showToast(error.message);
+  }
 }
 
 async function confirmCandidate(confirmedLetter) {
@@ -133,51 +252,54 @@ async function analyzeSequence() {
   canvas.height = 360;
   const context = canvas.getContext("2d");
   const frames = [];
-  try {
-    for (let index = 0; index < 12; index += 1) {
-      context.drawImage(elements.video, 0, 0, canvas.width, canvas.height);
-      frames.push(canvas.toDataURL("image/jpeg", 0.65));
-      await wait(80);
-    }
-    const prediction = await api("/api/predict", {
-      method: "POST",
-      body: JSON.stringify({ frames }),
-    });
-    if (!prediction.manual_label) {
-      elements.predictionLetter.textContent = "?";
-      elements.predictionLabel.textContent = "Sinal não identificado";
-      elements.predictionDetail.textContent = prediction.message;
+  await window.HandOverlay.withTrackingPaused(state, async () => {
+    try {
+      for (let index = 0; index < 12; index += 1) {
+        context.drawImage(elements.video, 0, 0, canvas.width, canvas.height);
+        frames.push(canvas.toDataURL("image/jpeg", 0.65));
+        await wait(80);
+      }
+      const prediction = await api("/api/predict", {
+        method: "POST",
+        body: JSON.stringify({ frames }),
+      });
+      if (!prediction.manual_label) {
+        elements.predictionLetter.textContent = "?";
+        elements.predictionLabel.textContent = "Sinal não identificado";
+        elements.predictionDetail.textContent = prediction.message;
+        elements.facialDetail.textContent = prediction.facial_expression
+          ? `Expressão facial: ${prediction.facial_expression}`
+          : "Expressão facial: não identificada.";
+        return;
+      }
+      state.candidate = {
+        letter: prediction.manual_label,
+        confidence: prediction.manual_confidence,
+        modelVersion: prediction.manual_model_version,
+        facialExpression: prediction.facial_expression,
+        facialConfidence: prediction.facial_confidence,
+        facialModelVersion: prediction.facial_model_version,
+      };
+      elements.predictionLetter.textContent = prediction.manual_label;
+      elements.predictionLabel.textContent = `Sinal identificado: ${prediction.manual_label}`;
+      elements.predictionDetail.textContent = `Confiança manual: ${Math.round(prediction.manual_confidence * 100)}%`;
       elements.facialDetail.textContent = prediction.facial_expression
-        ? `Expressão facial: ${prediction.facial_expression}`
-        : "Expressão facial: não identificada.";
-      return;
+        ? `Expressão facial: ${prediction.facial_expression} (${Math.round(prediction.facial_confidence * 100)}%)`
+        : "Expressão facial: segunda etapa do projeto.";
+      elements.confirmLetter.disabled = prediction.manual_label.length !== 1;
+      elements.correctLetter.disabled = prediction.manual_label.length !== 1;
+    } catch (error) {
+      showToast(error.message);
+    } finally {
+      elements.analyzeFrame.disabled = false;
+      elements.analyzeFrame.textContent = "Identificar sinal";
     }
-    state.candidate = {
-      letter: prediction.manual_label,
-      confidence: prediction.manual_confidence,
-      modelVersion: prediction.manual_model_version,
-      facialExpression: prediction.facial_expression,
-      facialConfidence: prediction.facial_confidence,
-      facialModelVersion: prediction.facial_model_version,
-    };
-    elements.predictionLetter.textContent = prediction.manual_label;
-    elements.predictionLabel.textContent = `Sinal identificado: ${prediction.manual_label}`;
-    elements.predictionDetail.textContent = `Confiança manual: ${Math.round(prediction.manual_confidence * 100)}%`;
-    elements.facialDetail.textContent = prediction.facial_expression
-      ? `Expressão facial: ${prediction.facial_expression} (${Math.round(prediction.facial_confidence * 100)}%)`
-      : "Expressão facial: segunda etapa do projeto.";
-    elements.confirmLetter.disabled = prediction.manual_label.length !== 1;
-    elements.correctLetter.disabled = prediction.manual_label.length !== 1;
-  } catch (error) {
-    showToast(error.message);
-  } finally {
-    elements.analyzeFrame.disabled = false;
-    elements.analyzeFrame.textContent = "Identificar sinal";
-  }
+  });
 }
 
 async function toggleCamera() {
   if (state.stream) {
+    stopHandTracking();
     state.stream.getTracks().forEach((track) => track.stop());
     state.stream = null;
     elements.video.srcObject = null;
@@ -203,6 +325,7 @@ async function toggleCamera() {
     elements.cameraState.textContent = "Câmera ativa";
     elements.cameraToggle.textContent = "Desativar câmera";
     elements.analyzeFrame.disabled = !state.recognizerAvailable;
+    startHandTracking();
   } catch (_error) {
     showToast("Não foi possível acessar a câmera. Confira a permissão do navegador.");
   }
@@ -231,9 +354,9 @@ async function initialize() {
 
 elements.cameraToggle.addEventListener("click", toggleCamera);
 elements.analyzeFrame.addEventListener("click", analyzeSequence);
-elements.addManual.addEventListener("click", addManualLetter);
+elements.addManual.addEventListener("click", addManualText);
 elements.manualLetter.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") addManualLetter();
+  if (event.key === "Enter") addManualText();
 });
 elements.addSpace.addEventListener("click", () => recordEvent("space", { source: "manual" }));
 elements.removeLast.addEventListener("click", () => recordEvent("backspace", { source: "manual" }));
@@ -267,6 +390,7 @@ elements.speakMessage.addEventListener("click", () => {
 });
 
 window.addEventListener("beforeunload", () => {
+  stopHandTracking();
   state.stream?.getTracks().forEach((track) => track.stop());
 });
 
