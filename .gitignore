@@ -8,3 +8,4 @@ artifacts/
 *.mp4
 
 .venv/
+/modelo-manual-thais.zip

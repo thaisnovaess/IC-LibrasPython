@@ -82,7 +82,9 @@ class ServerTest(unittest.TestCase):
         self.assertIn("Libras em texto", page)
         self.assertIn('id="hand-overlay"', page)
         self.assertIn('id="live-preview"', page)
+        self.assertIn('id="signal-history"', page)
         self.assertIn('src="/hand-overlay.js"', page)
+        self.assertIn('src="/session-history.js"', page)
         self.assertIn('maxlength="500"', page)
 
         status, created = self.request("/api/sessions", "POST")

@@ -38,6 +38,8 @@ const elements = {
   removeLast: document.querySelector("#remove-last"),
   clearMessage: document.querySelector("#clear-message"),
   speakMessage: document.querySelector("#speak-message"),
+  signalHistory: document.querySelector("#signal-history"),
+  historyCount: document.querySelector("#history-count"),
   dialog: document.querySelector("#correction-dialog"),
   correctionForm: document.querySelector("#correction-form"),
   correctedValue: document.querySelector("#corrected-value"),
@@ -173,10 +175,48 @@ function renderMessage() {
   elements.clearMessage.disabled = !state.message;
 }
 
+function renderSignalHistory(events) {
+  const recognitions = window.SessionHistory.recognizedEvents(events);
+  elements.signalHistory.replaceChildren();
+  elements.historyCount.textContent = `${recognitions.length} ${recognitions.length === 1 ? "sinal" : "sinais"}`;
+
+  if (!recognitions.length) {
+    const empty = document.createElement("li");
+    empty.className = "history-empty";
+    empty.textContent = "Nenhum sinal confirmado nesta sessão.";
+    elements.signalHistory.append(empty);
+    return;
+  }
+
+  for (const recognition of recognitions) {
+    const item = document.createElement("li");
+    item.className = `history-item${recognition.corrected ? " is-corrected" : ""}`;
+
+    const letter = document.createElement("strong");
+    letter.className = "history-letter";
+    letter.textContent = recognition.confirmedLetter;
+
+    const details = document.createElement("div");
+    const description = document.createElement("strong");
+    description.textContent = recognition.corrected
+      ? `Previsto ${recognition.predictedLetter} · corrigido para ${recognition.confirmedLetter}`
+      : `Sinal ${recognition.confirmedLetter} confirmado`;
+
+    const metadata = document.createElement("p");
+    const confidence = window.SessionHistory.confidenceLabel(recognition.confidence);
+    metadata.textContent = `${confidence} · ${window.SessionHistory.timeLabel(recognition.createdAt)}`;
+
+    details.append(description, metadata);
+    item.append(letter, details);
+    elements.signalHistory.append(item);
+  }
+}
+
 async function refreshSession() {
   const session = await api(`/api/sessions/${state.sessionId}`);
   state.message = session.text;
   renderMessage();
+  renderSignalHistory(session.events);
 }
 
 async function recordEvent(eventType, extra = {}) {

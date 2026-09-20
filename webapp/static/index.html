@@ -119,6 +119,20 @@
           <button id="speak-message" class="primary-button" type="button">Ouvir mensagem</button>
         </div>
       </section>
+
+      <section class="history-panel" aria-labelledby="history-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">4. Revise os reconhecimentos</p>
+            <h2 id="history-title">Histórico dos sinais</h2>
+          </div>
+          <span id="history-count" class="quiet-status">0 sinais</span>
+        </div>
+
+        <ol id="signal-history" class="signal-history" aria-live="polite">
+          <li class="history-empty">Nenhum sinal confirmado nesta sessão.</li>
+        </ol>
+      </section>
     </main>
 
     <dialog id="correction-dialog" aria-labelledby="correction-title">
@@ -136,6 +150,7 @@
 
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
     <script src="/hand-overlay.js" defer></script>
+    <script src="/session-history.js" defer></script>
     <script src="/app.js" defer></script>
   </body>
 </html>
